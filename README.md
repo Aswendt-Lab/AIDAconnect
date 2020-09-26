@@ -1,7 +1,3 @@
-# AIDAconnect
-Mouse brain network analysis of rs-fMRI and DTI data using graph theory
-
-
 [1.2]: http://i.imgur.com/wWzX9uB.png
 [1]: http://www.twitter.com/AswendtMarkus
 <!--social icon from https://github.com/carlsednaoui/gitsocial -->
@@ -9,7 +5,8 @@ Mouse brain network analysis of rs-fMRI and DTI data using graph theory
 <img align="left" src="https://github.com/maswendt/AIDAconnect/blob/master/AIDA_Logo.png" width="120">
 <h1>AIDA<i>connect</i></h1>
 Atlas-based Imaging Data Analysis Pipeline (AIDA) for structural and functional MRI of the mouse brain
-
+<br/>
+<br/>
 Atlas-based Image Data Analysis (AIDA) for structural and functional MRI of the mouse brain. AIDAconnect is a comprehensive collection of MATLAB scripts for mouse brain MRI data analysis and connectivity analysis using graph theory. It is developed for the automatic analysis of experimental stroke imaging data but will work for a multitude of neuroimaging applications.
 
 A detailed guide about the installation process and the usage of AIDAconnect is written in the Manual:
@@ -32,8 +29,8 @@ GNU General Public License v3.0
 
 + AIDA<i>mri [Pallast, N., et al. "Processing pipeline for Atlas-based Imaging Data Analysis (AIDA) of structural and functional mouse brain MRI" Frontiers in Neuroinformatics, 2019](https://www.frontiersin.org/articles/10.3389/fninf.2019.00042/full)
 + Brain Connectivity Toolbox
-    + [M. Rubinov and O. Sporns (2009). Complex Network Measures of Brain Connectivity: Uses 
-and Interpretations. NeuroImage 52 (3), 1059–69.](doi:10.1016/j.neuroimage.2009.10.003)
+    + [M. Rubinov and O. Sporns (2010). Complex Network Measures of Brain Connectivity: Uses 
+and Interpretations. NeuroImage 52 (3), 1059–69.](https://www.sciencedirect.com/science/article/abs/pii/S105381190901074X)
 + Allen Mouse Brain Reference Atlas
     + [Wang et al. (2020). The Allen Mouse Brain Common Coordinate Framework: A 3D Reference Atlas. Cell 181 (4), 936-953.](https://pubmed.ncbi.nlm.nih.gov/32386544/)
 + Niftyreg
