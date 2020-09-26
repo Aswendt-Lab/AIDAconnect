@@ -9,12 +9,10 @@ Atlas-based Imaging Data Analysis Pipeline (AIDA) for structural and functional 
 <br/>
 <br/>
 AIDAconnect is a comprehensive collection of MATLAB scripts for mouse brain MRI data analysis and connectivity analysis using graph theory. It is developed for the automatic analysis of experimental stroke imaging data but will work for a multitude of neuroimaging applications.
-
-A detailed guide about the installation process and the usage of AIDAconnect is written in the Manual:
+<br/>
+A detailed guide for the installation process and the usage of AIDAconnect is written in the Manual:
 => [MANUAL](https://github.com/maswendt/AIDAconnect/blob/master/AIDAconnect_Manual.pdf)
 <br/>
-<br/>
-
 The given tools from AIDAconncet are provided for anatomical T2-weighted MRI (T2w), diffusion tensor imaging (DTI) and resting-state functional MRI (rs-fMRI) data and are currently designed for creating weighted-undirected graphs only.
 
 [<h3><b>CONTACT</h3></b>](https://neurologie.uk-koeln.de/forschung/ag-neuroimaging-und-neuroengineering/)
@@ -27,7 +25,8 @@ GNU General Public License v3.0
 <details>
 <summary>REFERENCES</summary></b>
 
-+ AIDA<i>mri [Pallast, N., et al. "Processing pipeline for Atlas-based Imaging Data Analysis (AIDA) of structural and functional mouse brain MRI" Frontiers in Neuroinformatics, 2019](https://www.frontiersin.org/articles/10.3389/fninf.2019.00042/full)
++ AIDA<i>mri</i>
+    + [Pallast, N., et al. "Processing pipeline for Atlas-based Imaging Data Analysis (AIDA) of structural and functional mouse brain MRI" Frontiers in Neuroinformatics, 2019](https://www.frontiersin.org/articles/10.3389/fninf.2019.00042/full)
 + Brain Connectivity Toolbox
     + [M. Rubinov and O. Sporns (2010). Complex Network Measures of Brain Connectivity: Uses 
 and Interpretations. NeuroImage 52 (3), 1059–69.](https://www.sciencedirect.com/science/article/abs/pii/S105381190901074X)
