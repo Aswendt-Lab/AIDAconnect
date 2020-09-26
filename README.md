@@ -27,7 +27,7 @@ GNU General Public License v3.0
 <details>
 <summary>REFERENCES</summary></b>
 
-+ AIDA<i>mri</i>
++ AIDA<i>mri
     + [Pallast, N., et al. "Processing pipeline for Atlas-based Imaging Data Analysis (AIDA) of structural and functional mouse brain MRI" Frontiers in Neuroinformatics, 2019](https://www.frontiersin.org/articles/10.3389/fninf.2019.00042/full)
 + Brain Connectivity Toolbox
     + [M. Rubinov and O. Sporns (2010). Complex Network Measures of Brain Connectivity: Uses 
