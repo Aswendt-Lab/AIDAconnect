@@ -10,13 +10,13 @@ Atlas-based Imaging Data Analysis Pipeline (AIDA) for structural and functional 
 <br/>
 AIDAconnect is a comprehensive collection of MATLAB scripts for mouse brain MRI data analysis and connectivity analysis using graph theory. A detailed guide for the installation process and the usage of AIDAconnect is written in the manual.
 
+[Information about Version 1.0](https://github.com/maswendt/AIDAconnect/releases/tag/v1.0)
+
 <h3><b>INSTALLATION</h3></b>
 
 => [MANUAL](https://github.com/maswendt/AIDAconnect/blob/master/AIDAconnect_Manual.pdf)
 
 The given tools from AIDAconnect are provided for anatomical T2-weighted MRI (T2w), diffusion tensor imaging (DTI) and resting-state functional MRI (rs-fMRI) data and are currently designed for creating weighted-undirected graphs only.
-
-[Information about Version 1.0](https://github.com/maswendt/AIDAconnect/blob/master/AIDAconnect_Manual.pdf)
 
 [<h3><b>CONTACT</h3></b>](https://neurologie.uk-koeln.de/forschung/ag-neuroimaging-und-neuroengineering/)
 Leon Scharwächter and Markus Aswendt (contact: markus.aswendt@uk-koeln.de)[![alt text][1.2]][1]
