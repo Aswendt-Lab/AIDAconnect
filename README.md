@@ -7,7 +7,7 @@
 Atlas-based Imaging Data Analysis Pipeline (AIDA) for structural and functional MRI of the mouse brain
 <br/>
 <br/>
-AIDAconnect is a comprehensive collection of MATLAB scripts for mouse brain MRI data analysis and connectivity analysis using graph theory. A detailed guide for the installation process and the usage of AIDAconnect is written in the manual. <br/>
+AIDAconnect is a comprehensive collection of MATLAB scripts for mouse brain MRI data analysis and connectivity analysis using graph theory. A detailed guide for the installation process and the usage of AIDAconnect is written in the manual. <br/><br/>
 
 
 [Information about Version 1.0](https://github.com/maswendt/AIDAconnect/releases/tag/v1.0)
