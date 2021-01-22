@@ -7,7 +7,7 @@
 inputFMRI.in_path = "/Volumes/path/to/proc_data";
  
 % Observation days e.g. "P1" etc.
-inputFMRI.days = ["Baseline","P7","P14","P14","P28","P42","P56"];
+inputFMRI.days = ["Baseline","P7","P14","P28","P42","P56"];
  
 % Groups e.g. "Sham" etc.
 inputFMRI.groups =  ["Group1", "Group2"];
