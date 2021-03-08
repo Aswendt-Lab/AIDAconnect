@@ -14,6 +14,7 @@ numOfRegions = 98;
 
 for d = 1:length(days)
     for g = 1:length(groups)
+        disp('Processing '+days(d)+': '+groups(g)+' ...');       
         cur_path = char(fullfile(path,days(d),groups(g)));
         matFile_cur = dir([cur_path '/*/fMRI/regr/MasksTCsSplit*txt.mat']);
         infoFMRI = struct();
@@ -41,54 +42,50 @@ for d = 1:length(days)
             error('There is no content in the given path!');
         end
         
-        for i = 1:length(matFile_cur)
+        for i = 1:length(matFile_cur) % i = Subjects
             tempName = strsplit(matFile_cur(i).folder,filesep);
             tempName = strsplit(string(tempName(end-2)),'_');
             tempName = strjoin(tempName(1:4),'_');
             namesOfMat{i} = tempName;
             
             [coMat(:,:,i),labels] = matrixMaker_rsfMRI((fullfile(matFile_cur(i).folder,matFile_cur(i).name)));
-            current_matAll=coMat;
-            current_matAll(abs(coMat)<thres)=0; % Threshold for correlations  
+            current_matAll = abs(coMat); % Absolute values of the matrices
+            current_matAll(current_matAll<thres) = 0; % Threshold for correlations
             
             for ii = 1:size(current_matAll,1)
-                current_matAll(ii,ii,i)=0; % Ensure there are no self-connections
+                current_matAll(ii,ii,i) = 0; % Ensure there are no self-connections
             end
-            current_mat=current_matAll(:,:,i);
+            current_mat = current_matAll(:,:,i);
 
-            % Prepare current_mat for the parameters:
-            % Local: clustering_coeff, betweenness and
-            % Global: efficiency, transitivity, charPathLength           
-            current_mat_NoNegatives = current_mat;
-            current_mat_NoNegatives(current_mat<=0)=0;
-            current_mat_NoNegatives_inverse = 1./current_mat_NoNegatives;
-       
-            randomNetwork = randmio_und_connected(current_mat_NoNegatives, 5);
+            % Hint: 
+            % The calculations of the following metrics using BCT
+            % do not allow negative values:
+            % Local: efficiency, clustering_coeff, betweenness and
+            % Global: efficiency, transitivity, charPathLength 
             
-            % Reason:
-            % The calculation of the BCT for betweenness centrality only 
+            % The calculation of betweenness centrality only 
             % works with connection length matrices.
-            % The inverse matrix is some kind of connection length matrix.
+            % The inverse matrix is some kind of connection length matrix:
             % High correlations result in short distances.
-
-            % As we still work to sufficiently explain the role of
-            % anti-correlations, we decided to remove negative values
-            % in the connnectivity matrices (=0) for the calculation of
-            % some of the local and global measures.
+            % Random networks are used to normalize the smallWorldness
+            % metric
             
+            current_mat_inverse = 1./current_mat;
+            randomNetwork = randmio_und_connected(current_mat, 5);
+           
             % Local parameters for each region using graph theory (BCT)
-            clustercoef(i,:) =  clustering_coef_wu(current_mat_NoNegatives);
+            clustercoef(i,:) =  clustering_coef_wu(current_mat);
             clustercoef_rand(i,:) = clustering_coef_wu(randomNetwork);
             degrees(i,:) =      degrees_und(current_mat)';
             strengths(i,:) =    strengths_und(current_mat)';
-            betweenness(i,:) =  betweenness_wei(current_mat_NoNegatives_inverse);           
+            betweenness(i,:) =  betweenness_wei(current_mat_inverse);           
             centrality_eigen(i,:) =   eigenvector_centrality_und(current_mat); 
-            localEfficiency(i,:) = efficiency_wei(current_mat_NoNegatives,2);
+            localEfficiency(i,:) = efficiency_wei(current_mat,2);
             
-            % Global parameters for each region using graph theory (BCT)
+            % Global parameters for each subject using graph theory (BCT)
             density(i) = density_und(current_mat);
-            transitivity(i) = transitivity_wu(current_mat_NoNegatives);
-            efficiency(i) = efficiency_wei(current_mat_NoNegatives);
+            transitivity(i) = transitivity_wu(current_mat);
+            efficiency(i) = efficiency_wei(current_mat);
             efficiency_rand(i) = efficiency_wei(randomNetwork);
             assortativity(i) = assortativity_wei(current_mat,0);           
             charPathLength(i) = 1./efficiency(i);
@@ -123,9 +120,9 @@ for d = 1:length(days)
         % Normalizing smallWorldness using random networks:
         % clustercoeff(:,i) returns a matrix for the given subject i
         % charPathLength(i) returns a value for the given subject i
-        % Both measures are normalized by dividing with the same
-        % measure of a random network.       
-        % If S>1 then the network can be labeled as "small world".
+        % Both metrics are normalized dividing by the metric values
+        % of a random network.
+        % If smallWorldness > 1 then the network can be labeled as "small world".
         
         clustercoef_normalized(:,i) = nanmean(clustercoef(:,i),2)./nanmean(clustercoef_rand(:,i),2);
         charPathLength_normalized(i) = charPathLength(i)/charPathLength_rand(i);        
@@ -136,7 +133,7 @@ for d = 1:length(days)
         targetPath = fullfile(out_path,groups(g));
         if ~exist(targetPath,'dir')
             mkdir(targetPath);
-        end   
+        end
         disp(strcat(targetPath,filesep,days(d),'.mat'))
         disp(infoFMRI.names)
         save(strcat(targetPath,filesep,days(d),'.mat'),'infoFMRI')

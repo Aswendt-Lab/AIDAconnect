@@ -1,4 +1,4 @@
-function [graphCell,matrixValues,ids,t,d,s]=graphAnalysis_fMRI(inputFMRI)
+function [graphCell,meanMatrixValues,ids,t,d,s]=graphAnalysis_fMRI(inputFMRI)
 
 %% graphAnalysis
 % This function is used by mergeFMRIdata_input.m and is not meant to be
@@ -7,14 +7,14 @@ function [graphCell,matrixValues,ids,t,d,s]=graphAnalysis_fMRI(inputFMRI)
 path = inputFMRI.out_path;
 groups = inputFMRI.groups;
 days = inputFMRI.days;
-%% load related information
+%% Load related information
 tempFile = load('../Tools/infoData/acronyms_splitted.mat');
 acronyms = tempFile.acronyms;
 tempFile = load('../Tools/infoData/acro_numbers_splitted.mat');
 acro_numbers = tempFile.annotationsNumber;
 niiData = load_nii('../Tools/infoData/annoVolume+2000_rsfMRI.nii.gz');
 volume = niiData.img;
-%% find center of gravity for existing labels
+%% Find center of gravity for existing labels
 x_coord = nan(length(acro_numbers),1);
 y_coord = nan(length(acro_numbers),1);
 z_coord = nan(length(acro_numbers),1);
@@ -25,40 +25,41 @@ y_coord(i) = ceil(mean(c));
 z_coord(i) = ceil(mean(v));
 end
 
-%% create graphs
-matrixValues = cell(length(groups),length(days));
+%% Create graphs
+meanMatrixValues = cell(length(groups),length(days));
 ids = cell(length(groups),length(days));
 graphCell = cell(length(groups),length(days));
 for gIdx = 1:length(groups)
-    for dIdx = 1:length(days)
+    disp('Load '+groups(gIdx))
+    for dIdx = 1:length(days)    
         
-        tempF = load(fullfile(path,groups(gIdx),[char(days(dIdx)) '.mat']));
-        
-        tempV = mean(tempF.infoFMRI.matrix,3);
-        matrixValues{gIdx,dIdx} = tempV;
-        matrixThres = abs(matrixValues{gIdx,dIdx});      
-        ids{gIdx,dIdx} = tempF.infoFMRI.names;
-        
-        matrix = matrixValues{gIdx,dIdx};
-        labels = tempF.infoFMRI.labels;
-        
+        % Load the files created by getMergedFMRI_data.m 
+        % and get the correlation matrices
+        tempFile = load(fullfile(path,groups(gIdx),[char(days(dIdx)) '.mat']));
+        tempMatrices = tempFile.infoFMRI.matrix;
+        meanMatrixValues = mean(tempMatrices,3);
+        ids{gIdx,dIdx} = tempFile.infoFMRI.names;
+
         disp(days(dIdx))
-        G = graph(matrixThres, cellstr(acronyms),'upper');
+        
+        % Build the graph using the upper triangle of the matrix stored
+        % in meanMatrixValues
+        G = graph(meanMatrixValues, cellstr(acronyms),'upper');
         G.Nodes.XCoord = x_coord;
         G.Nodes.YCoord = y_coord;
         G.Nodes.ZCoord = z_coord;
+       
+        % Store the matrices of all individual subjects in allMatrix   
+        G.Nodes.allMatrix = tempMatrices;
         
-        tempMatrix = tempF.infoFMRI.matrix;    
-        G.Nodes.allMatrix = tempMatrix;
-
-        for mIdx = 1:size(G.Nodes.allMatrix,3) % mIdx = animal Index
-        % calculations based on BCT     
-            G.Nodes.allDegree(:,mIdx) = tempF.infoFMRI.degrees(mIdx,:);
-            G.Nodes.allStrength(:,mIdx) = tempF.infoFMRI.strengths(mIdx,:);
-            G.Nodes.allEigenvector(:,mIdx) = tempF.infoFMRI.eign_centrality(mIdx,:);
-            G.Nodes.allBetweenness(:,mIdx) = tempF.infoFMRI.betw_centrality(mIdx,:);
-            G.Nodes.allClustercoef(:,mIdx) = tempF.infoFMRI.clustercoef(mIdx,:);
-            G.Nodes.allEfficiency(:,mIdx) = tempF.infoFMRI.localEfficiency(mIdx,:);
+        % Store local graph metrics at each node (region)
+        for mIdx = 1:size(G.Nodes.allMatrix,3) % mIdx = animal Index    
+            G.Nodes.allDegree(:,mIdx) = tempFile.infoFMRI.degrees(mIdx,:);
+            G.Nodes.allStrength(:,mIdx) = tempFile.infoFMRI.strengths(mIdx,:);
+            G.Nodes.allEigenvector(:,mIdx) = tempFile.infoFMRI.eign_centrality(mIdx,:);
+            G.Nodes.allBetweenness(:,mIdx) = tempFile.infoFMRI.betw_centrality(mIdx,:);
+            G.Nodes.allClustercoef(:,mIdx) = tempFile.infoFMRI.clustercoef(mIdx,:);
+            G.Nodes.allEfficiency(:,mIdx) = tempFile.infoFMRI.localEfficiency(mIdx,:);
         end
         graphCell{gIdx,dIdx} = G; 
     end
