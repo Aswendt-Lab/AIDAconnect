@@ -11,7 +11,7 @@ tempFile = load('../Tools/infoData/acronyms_splitted.mat');
 acronyms = tempFile.acronyms;
 
 numOfRegions = length(inputDTI.index);
-index=inputDTI.index;
+index = inputDTI.index;
 
 TotalData=nan*ones(numOfRegions,numOfRegions ,10,length(days),length(groups));
 Cat=[];

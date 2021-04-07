@@ -7,7 +7,7 @@
 
 %% Specifications
 
-threshold=0;
+threshold = 0;
 
 path_matrix1 = '/Users/Username/Documents/Projects/proc_data/outputDTI/GroupName1/Baseline.mat';
 path_matrix2 = '/Users/Username/Documents/Projects/proc_data/outputDTI/GroupName1/P7.mat';
@@ -17,16 +17,22 @@ path_matrix2 = '/Users/Username/Documents/Projects/proc_data/outputDTI/GroupName
 % Plot Generation
 load(path_matrix1)
 baseline=infoDTI;
+labelsFirstDay = baseline.labels;
+numberOfLabelsFirstDay = size(labelsFirstDay,1);
 load(path_matrix2)
 post=infoDTI;
-labels=baseline.labels;
+labelsSecondDay = post.labels;
+numberOfLabelsSecondDay = size(labelsSecondDay,1);
+if numberOfLabelsFirstDay ~= numberOfLabelsSecondDay
+    disp('Warning: Number of labels differ between both matrices');
+end
 Baseline_medMatrix=median(baseline.matrix,3);
 P14_medMatrix=median(post.matrix,3);
 diffMatrix=Baseline_medMatrix;
 indices=find(sum(abs(diffMatrix),2)<threshold);
 diffMatrix(:,indices)=[];
 diffMatrix(indices,:)=[];
-labels(indices)=[];
+labelsFirstDay(indices)=[];
 %indices = find(abs(diffMatrix)>2);
 %diffMatrix(indices) = NaN;
 [nrows,ncols]=size(diffMatrix);
@@ -34,9 +40,9 @@ labels(indices)=[];
 % Set main diagonal to NaN
 diffMatrix(1:nrows+1:numel(diffMatrix))=nan;
 figure
-h=imagesc(diffMatrix,[0 100]); colormap(jet); colorbar; grid off;
+h=imagesc(diffMatrix,[0 numberOfLabelsFirstDay+2]); colormap(jet); colorbar; grid off;
 set(h,'alphadata',~isnan(diffMatrix));
 
- set(gca,'XTick',1:98,'XTickLabel',labels,'XTickLabelRotation',90,'fontsize',10,...
-            'YTick',1:98,'YTickLabel',labels,'TickLength',[0 0],'fontsize',10);
+ set(gca,'XTick',1:numberOfLabelsFirstDay,'XTickLabel',labelsFirstDay,'XTickLabelRotation',90,'fontsize',10,...
+            'YTick',1:numberOfLabelsFirstDay,'YTickLabel',labelsFirstDay,'TickLength',[0 0],'fontsize',10);
         colorbar

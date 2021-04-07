@@ -45,13 +45,16 @@ addpath('./GraphEval/')
 % Load acronyms
 load('../Tools/infoData/acronyms_splitted.mat');
 
+% Get number of regions
+numberOfRegions = size(graphCell{1}.Nodes,1);
+
 Sides = ["L ","R "]; % Sides of Region-suffix to analyze
 dIdx = find(contains(inputDTI.days,day));
 relevantRegionsID = [];
 OverallRegionsIDs = NaN * ones(NRegions2analyze, 2);
 relevantRegionsGrouped = NaN * ones(NRegions2analyze, 4);
 sortedConnWeightsGrouped = NaN * ones(NRegions2analyze, 4);
-inputDTI.index=1:98;
+inputDTI.index=1:numberOfRegions;
 [OutStruct] = getTotalData(inputDTI);
 
 for jj = 1:2 % Left and Right

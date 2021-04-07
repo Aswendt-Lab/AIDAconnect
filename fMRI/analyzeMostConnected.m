@@ -44,13 +44,16 @@ addpath('./rsfMRI_Processing/')
 % Load acronyms
 load('../Tools/infoData/acronyms_splitted.mat');
 
+% Get number of regions
+numberOfRegions = size(graphCell{1}.Nodes,1);
+
 Sides = ["L ","R "]; % Sides of Region-suffix to analyze
 dIdx = find(contains(inputFMRI.days,day));
 relevantRegionsID = [];
 OverallRegionsIDs = NaN * ones(NRegions2analyze, 2);
 relevantRegionsGrouped = NaN * ones(NRegions2analyze, 4);
 sortedConnWeightsGrouped = NaN * ones(NRegions2analyze, 4);
-inputFMRI.index=1:98;
+inputFMRI.index=1:numberOfRegions;
 [OutStruct] = getTotalData(inputFMRI);
 
 for jj = 1:2 % Left and Right

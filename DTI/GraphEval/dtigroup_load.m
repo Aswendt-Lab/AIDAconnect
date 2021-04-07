@@ -38,7 +38,7 @@ for i=1:2:Nsubjects
     labels = textscan(char(tdata.name),'%s');
 
     % Create custom node labels
-    %myLabel = cell(length(annoVolume2000rsfMRI),1);
+    % myLabel = cell(length(annoVolume2000rsfMRI),1);
     curLabels = string(labels{1});
     [~,ia] =intersect(refLabels,curLabels);
     missingLabels = setxor(sort(ia),1:length(refLabels));
@@ -46,7 +46,7 @@ for i=1:2:Nsubjects
     myLabel = cellstr(c_refLabels);
     zeroVec = zeros(length(refLabels),length(refLabels));
     zeroVec(sort(ia),sort(ia))= connectivity;
-     %normalize connectivty matrix by regions Size
+    % Normalize connectivity matrix by number of atlas labels
     connectivityFilled = zeroVec;
      
     %matStd = mean(std(connectivityFilled)); 

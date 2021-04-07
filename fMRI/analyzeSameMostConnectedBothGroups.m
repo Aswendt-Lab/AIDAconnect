@@ -43,14 +43,15 @@ inputFMRI.days = [day];
 addpath('./rsfMRI_Processing/')
 
 % Load acronyms
-load('../Tools/infoData/acronyms_splitted.mat');
+acronyms = load('../Tools/infoData/acronyms_splitted.mat').acronyms;
+numberOfRegions = size(acronyms,1);
 
 % Find and analyze the N most connected regions
 relevantRegionsID = [];
 OverallRegionsIDs = NaN * ones(NRegions2analyze, 2);
 cache = OverallRegionsIDs;
 cache_weight_mean = zeros(NRegions2analyze, 2);
-inputFMRI.index=1:98;
+inputFMRI.index=1:numberOfRegions;
 [OutStruct] = getTotalData(inputFMRI);
 
 for jj = 1:2 % Left and Right

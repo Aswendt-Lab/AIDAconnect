@@ -32,7 +32,9 @@ end
 
 % Generate Matrix of significant connections
 addpath('./GraphEval/')
-inputDTI.index = 1:98;
+acronyms = load('../Tools/infoData/acronyms_splitted.mat').acronyms;
+numOfRegions = size(acronyms,1);
+inputDTI.index = 1:numOfRegions;
 [OutStruct] = getTotalData(inputDTI);
 p = [];
 dayI = find(inputDTI.days == day);
@@ -46,6 +48,9 @@ imagesc(p < 0.05)
 title(['Significant Group Differences Day ', char(inputDTI.days(dayI))])
 ylabel('Regions of Group 1: '+strrep(inputDTI.groups(1),'_',' '));
 xlabel('Regions of Group 2: '+strrep(inputDTI.groups(2),'_',' '));
+set(gca,'xtick',1:numOfRegions,'xticklabel',acronyms,'fontsize',8)
+set(gca,'ytick',1:numOfRegions,'yticklabel',acronyms,'fontsize',8)
+xtickangle(45);
 
 if inputDTI.save == 1
     fig = gcf;

@@ -4,14 +4,15 @@
 
 %% Specifications
 
+% Path to the processed image data folder (e.g. proc_data)
 inputFMRI.in_path = "/Volumes/path/to/proc_data";
- 
-% Observation days e.g. "P1" etc.
+
+% Observation days e.g. “P1" etc.
 inputFMRI.days = ["Baseline","P7","P14","P28","P42","P56"];
- 
-% Groups e.g. "Sham" etc.
-inputFMRI.groups =  ["Group1", "Group2"];
- 
+
+% Groups e.g. “Sham” etc.
+inputFMRI.groups = ["Group1", "Group2"];
+
 % Threshold 
 thres = 0.1;
  

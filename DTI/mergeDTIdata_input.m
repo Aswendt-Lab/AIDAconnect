@@ -8,7 +8,7 @@
 inputDTI.in_path = "/Volumes/path/to/proc_data";
 
 % Observation days (e.g. "P1" etc.)
-inputDTI.days = ["Baseline","P7","P14","P14","P28","P42","P56"];
+inputDTI.days = ["Baseline","P7","P14","P28","P42","P56"];
 
 % Groups (e.g. "Sham" etc.)
 inputDTI.groups = ["Group1", "Group2"];

@@ -7,19 +7,18 @@ function getMergedDTI_data(dtiStruct,thres)
 addpath('../Tools/BCT');
 path  = dtiStruct.in_path;
 groups = dtiStruct.groups;
-days= dtiStruct.days;
-out_path=dtiStruct.out_path;
-% number of regions
+days = dtiStruct.days;
+out_path = dtiStruct.out_path;
 tempF = load('../Tools/infoData/acro_numbers_splitted.mat');
 acroNum = tempF.annotationsNumber;
-numOfRegions = 98;
+numOfRegions = size(acroNum,1);
 
 for d = 1:length(days)
     for g = 1:length(groups)
         disp('Processing '+days(d)+': '+groups(g)+' ...');     
         cur_path = char(fullfile(path,days(d),groups(g)));
-        matFile_cur = dir([cur_path '/*/DTI/connectivity/*rsfMRISplit*pass.connectivity.mat']);
-        infoDTI =struct();
+        matFile_cur = dir([cur_path '/*/DTI/connectivity/*rsfMRISplit*pass.connectivity.mat']);       
+        infoDTI = struct();
         coMat=zeros(numOfRegions,numOfRegions,length(matFile_cur));
         namesOfMat = cell(length(matFile_cur),1);
         clustercoef =               zeros(length(matFile_cur),numOfRegions);  
@@ -67,13 +66,13 @@ for d = 1:length(days)
             
             % Apply the threshold for the number of fibers
             threshold = mean(current_matAll)*thres;
-            current_matAll(current_matAll<threshold)=0;
+            current_matAll(current_matAll<threshold) = 0;
          
             % Ensure there are no self-connections
             for ii = 1:size(current_matAll,1)
-                current_matAll(ii,ii,i)=0;
+                current_matAll(ii,ii,i) = 0;
             end 
-            current_mat=current_matAll(:,:,i);
+            current_mat = current_matAll(:,:,i);
             
             % Hint: 
             % The calculations of the following metrics using BCT

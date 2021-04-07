@@ -9,14 +9,29 @@ path  = fmriStruct.in_path;
 groups = fmriStruct.groups;
 days = fmriStruct.days;
 out_path = fmriStruct.out_path;
-% number of regions
-numOfRegions = 98;
-
+% initialize counter for the number of regions
+numOfRegions_all(1) = 0; 
+j = 2;
 for d = 1:length(days)
     for g = 1:length(groups)
         disp('Processing '+days(d)+': '+groups(g)+' ...');       
         cur_path = char(fullfile(path,days(d),groups(g)));
         matFile_cur = dir([cur_path '/*/fMRI/regr/MasksTCsSplit*txt.mat']);
+        % Random Sample Check
+        randomSubject = randsample(1:size(matFile_cur,1),1);
+        randomSubjectPath = strcat(matFile_cur(randomSubject,1).folder,'/',matFile_cur(randomSubject,1).name);
+        matFile_cur_temp = load(randomSubjectPath);
+        numOfRegions_all(j) = size(matFile_cur_temp.label,1);
+        if j-1 ~= 1 && numOfRegions_all(j) ~= numOfRegions_all(j-1)
+            disp('Warning: Number of atlas labels differs between two subjects, groups or days!');
+        end
+        % Create infoFMRI struct
+        numOfRegions = unique(numOfRegions_all(2:end));
+        % numOfRegions_all should contain a 0 in position 1.
+        % All subsequent positions should contain the number of atlas
+        % labels, which should always result in the same number.
+        % If not, then line 36 will cause an error because the numOfRegions
+        % is not unique anymore.
         infoFMRI = struct();
         coMat = zeros(numOfRegions,numOfRegions,length(matFile_cur));
         namesOfMat = cell(length(matFile_cur),1);
@@ -137,6 +152,7 @@ for d = 1:length(days)
         disp(strcat(targetPath,filesep,days(d),'.mat'))
         disp(infoFMRI.names)
         save(strcat(targetPath,filesep,days(d),'.mat'),'infoFMRI')
+        j = j+1;
     end
 end
 

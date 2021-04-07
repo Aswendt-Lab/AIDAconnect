@@ -36,8 +36,7 @@ for group_id = 1:size(inputDTI.groups,2)
     % all subjects (3rd dimension)
     allConnectionsI = mean(graphCell{group_id,dayI}.Nodes(regionIndexI,"allMatrix").allMatrix,3);
     allConnectionsII = mean(graphCell{group_id,dayII}.Nodes(regionIndexII,"allMatrix").allMatrix,3);
-    % allConnections now is a 1xN double array (N = all possible regions,
-    % default 98).
+    % allConnections now is a 1xN double array (N = number of all regions)
     % Find all non-existing connections at the second day
     zeroIndices = find(allConnectionsII==0);
     % Regarding these connections only, find all that were existent at 

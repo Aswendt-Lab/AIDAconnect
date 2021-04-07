@@ -29,11 +29,12 @@ else
 end
 
 numberOfDays = size(inputFMRI.days,2);
+numberOfRegions = size(graphCell{1}.Nodes,1);
 
-NodesGroup2 = zeros(98, numberOfDays);
-NodesGroup1 = zeros(98, numberOfDays);
+NodesGroup2 = zeros(numberOfRegions, numberOfDays);
+NodesGroup1 = zeros(numberOfRegions, numberOfDays);
 
-for b = 1:98 % for all regions
+for b = 1:numberOfRegions % for all regions
 % Group 1
     for dIdx = 1:numberOfDays % for all days
         numOfAnimals = size(graphCell{1, dIdx}.Nodes.allMatrix, 3);
@@ -43,7 +44,7 @@ for b = 1:98 % for all regions
         end
     end
     NodesGroup1(b, :) = nanmean(Group1, 1);
-    Group1(Group1 == 0) = nan; % matrix with 98 rows and X columns as days
+    Group1(Group1 == 0) = nan; % matrix with numberOfRegions rows and X columns as days
 % Group 2
     for dIdx = 1:numberOfDays
         numOfAnimals = size(graphCell{2, dIdx}.Nodes.allMatrix, 3);
