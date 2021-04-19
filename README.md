@@ -14,6 +14,7 @@ AIDAconnect is a comprehensive collection of MATLAB scripts for mouse brain MRI 
 
 <h3><b>INSTALLATION</h3></b>
 => [TEST DATA](https://doi.org/10.12751/g-node.2maonr)
+
 => [MANUAL](https://github.com/maswendt/AIDAconnect/blob/master/AIDAconnect_Manual.pdf)
 
 The given tools from AIDAconnect are provided for anatomical T2-weighted MRI (T2w), diffusion tensor imaging (DTI) and resting-state functional MRI (rs-fMRI) data and are currently designed for creating weighted-undirected graphs only.
