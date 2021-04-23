@@ -59,6 +59,7 @@ for gIdx = 1:length(groups)
             G.Nodes.allEigenvector(:,mIdx) = tempFile.infoDTI.eign_centrality(mIdx,:);
             G.Nodes.allBetweenness(:,mIdx) = tempFile.infoDTI.betw_centrality(mIdx,:); 
             G.Nodes.allClustercoef(:,mIdx) = tempFile.infoDTI.clustercoef(mIdx,:);
+            G.Nodes.allParticipationcoef(:,mIdx) = tempFile.infoDTI.participationcoef(mIdx,:);
             G.Nodes.allEfficiency(:,mIdx) = tempFile.infoDTI.localEfficiency(mIdx,:);
             G.Nodes.FA0(:,mIdx) = tempFile.infoDTI.FA0(mIdx,:);
             G.Nodes.AD(:,mIdx) = tempFile.infoDTI.AD(mIdx,:);

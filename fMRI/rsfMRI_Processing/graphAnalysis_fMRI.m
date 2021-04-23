@@ -59,6 +59,7 @@ for gIdx = 1:length(groups)
             G.Nodes.allEigenvector(:,mIdx) = tempFile.infoFMRI.eign_centrality(mIdx,:);
             G.Nodes.allBetweenness(:,mIdx) = tempFile.infoFMRI.betw_centrality(mIdx,:);
             G.Nodes.allClustercoef(:,mIdx) = tempFile.infoFMRI.clustercoef(mIdx,:);
+            G.Nodes.allParticipationcoef(:,mIdx) = tempFile.infoFMRI.participationcoef(mIdx,:);
             G.Nodes.allEfficiency(:,mIdx) = tempFile.infoFMRI.localEfficiency(mIdx,:);
         end
         graphCell{gIdx,dIdx} = G; 

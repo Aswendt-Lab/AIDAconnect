@@ -7,7 +7,8 @@ function plotLocalParameter(inputFMRI, graphCell, strNodeName, strParameter)
 % inputFMRI and graphCell from mergeFMRIdata_input.m
 % strNodeName = Region to examine (as String)
 % strParameter = 'Degree', 'Eigenvector', 'Betweenness', 'Strength',
-%                'Clustercoefficient', 'Efficiency'
+%                'Clustercoefficient', 'Participationcoefficient',
+%                'Efficiency'
 
 %% Example
 % plotLocalParameter(inputFMRI, graphCell, 'L SSp-ul', 'Degree') 
@@ -38,6 +39,8 @@ for dIdx=1:numOfDays
                 valuesGroup1(animal,dIdx) = graphCell{1,dIdx}.Nodes.allBetweenness(b,animal);
             case 'clustercoefficient' 
                 valuesGroup1(animal,dIdx) = graphCell{1,dIdx}.Nodes.allClustercoef(b,animal);
+            case 'participationcoefficient'
+                valuesGroup1(animal,dIdx) = graphCell{1,dIdx}.Nodes.allParticipationcoef(b,animal);  
             case 'efficiency' 
                 valuesGroup1(animal,dIdx) = graphCell{1,dIdx}.Nodes.allEfficiency(b,animal);
             otherwise
@@ -70,6 +73,8 @@ for dIdx=1:numOfDays
                 valuesGroup2(animal,dIdx) = graphCell{2,dIdx}.Nodes.allBetweenness(b,animal); 
             case 'clustercoefficient' 
                 valuesGroup2(animal,dIdx) = graphCell{2,dIdx}.Nodes.allClustercoef(b,animal);
+            case 'participationcoefficient'
+                valuesGroup2(animal,dIdx) = graphCell{2,dIdx}.Nodes.allParticipationcoef(b,animal);  
             case 'efficiency' 
                 valuesGroup2(animal,dIdx) = graphCell{2,dIdx}.Nodes.allEfficiency(b,animal);
             otherwise

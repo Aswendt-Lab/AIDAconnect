@@ -31,13 +31,15 @@ for d = 1:length(days)
         % All subsequent positions should contain the number of atlas
         % labels, which should always result in the same number.
         % If not, then line 36 will cause an error because the numOfRegions
-        % is not unique anymore.
+        % is not unique anymore. A quick solution is then to specify
+        % a concrete number in line 29 for numOfRegions, e.g. 98.
         infoFMRI = struct();
         coMat = zeros(numOfRegions,numOfRegions,length(matFile_cur));
         namesOfMat = cell(length(matFile_cur),1);
         clustercoef =               zeros(length(matFile_cur),numOfRegions); 
         clustercoef_rand =          zeros(length(matFile_cur),numOfRegions);
         clustercoef_normalized =    zeros(length(matFile_cur),numOfRegions);
+        participationcoef =         zeros(length(matFile_cur),numOfRegions);
         degrees =                   zeros(length(matFile_cur),numOfRegions); 
         strengths =                 zeros(length(matFile_cur),numOfRegions); 
         betweenness =               zeros(length(matFile_cur),numOfRegions); 
@@ -91,6 +93,11 @@ for d = 1:length(days)
             % Local parameters for each region using graph theory (BCT)
             clustercoef(i,:) =  clustering_coef_wu(current_mat);
             clustercoef_rand(i,:) = clustering_coef_wu(randomNetwork);
+            [communityAffiliationVector,~] = community_louvain(current_mat,1);
+            % The community affiliation vector assigns nodes to specific,
+            % non-overlapping modules and is a necessary parameter for the
+            % participation coefficient
+            participationcoef(i,:) = participation_coef(current_mat,communityAffiliationVector,0);
             degrees(i,:) =      degrees_und(current_mat)';
             strengths(i,:) =    strengths_und(current_mat)';
             betweenness(i,:) =  betweenness_wei(current_mat_inverse);           
@@ -120,6 +127,7 @@ for d = 1:length(days)
         infoFMRI.matrix = current_matAll;
         infoFMRI.labels = labels;
         infoFMRI.clustercoef = clustercoef;
+        infoFMRI.participationcoef = participationcoef;
         infoFMRI.degrees = degrees;
         infoFMRI.strengths = strengths;
         infoFMRI.betw_centrality = betweenness;
