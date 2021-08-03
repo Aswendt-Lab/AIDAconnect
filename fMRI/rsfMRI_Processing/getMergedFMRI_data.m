@@ -54,6 +54,7 @@ for d = 1:length(days)
         charPathLength=             nan(1,length(matFile_cur));
         charPathLength_rand =       nan(1,length(matFile_cur));
         charPathLength_normalized = nan(1,length(matFile_cur));
+        overallConnectivity =       zeros(1,length(matFile_cur));
         
         if length(matFile_cur)<1
             error('There is no content in the given path!');
@@ -73,6 +74,7 @@ for d = 1:length(days)
                 current_matAll(ii,ii,i) = 0; % Ensure there are no self-connections
             end
             current_mat = current_matAll(:,:,i);
+            overallConnectivity(i) = mean(current_mat, 'all');
 
             % Hint: 
             % The calculations of the following metrics using BCT
@@ -104,6 +106,7 @@ for d = 1:length(days)
             centrality_eigen(i,:) =   eigenvector_centrality_und(current_mat); 
             localEfficiency(i,:) = efficiency_wei(current_mat,2);
             
+          
             % Global parameters for each subject using graph theory (BCT)
             density(i) = density_und(current_mat);
             transitivity(i) = transitivity_wu(current_mat);
@@ -149,7 +152,8 @@ for d = 1:length(days)
         
         clustercoef_normalized(:,i) = nanmean(clustercoef(:,i),2)./nanmean(clustercoef_rand(:,i),2);
         charPathLength_normalized(i) = charPathLength(i)/charPathLength_rand(i);        
-        infoFMRI.smallWorldness = (clustercoef_normalized(:,i)/charPathLength_normalized(i))';        
+        infoFMRI.smallWorldness = (clustercoef_normalized(:,i)/charPathLength_normalized(i))';
+        infoFMRI.overallConnectivity = overallConnectivity;
         
         %infoFMRI.smallWorldness = (nanmean(clustercoef(:,i),2)/charPathLength(i))';
    

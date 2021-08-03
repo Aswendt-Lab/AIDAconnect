@@ -52,6 +52,10 @@ for gIdx=1:numOfGroups
                 tempFile = load(fullfile(path,groups(gIdx),[char(days(dIdx)) '.mat']));
                 currValues = tempFile.infoFMRI.smallWorldness;
                 valuesGroup{gIdx}(1:size(currValues,2),dIdx) = currValues;
+            case 'overallconnectivity'
+                tempFile = load(fullfile(path,groups(gIdx),[char(days(dIdx)) '.mat']));
+                currValues = tempFile.infoFMRI.overallConnectivity;
+                valuesGroup{gIdx}(1:size(currValues,2),dIdx) = currValues;
             otherwise
                 error('No valid Argument')
         end
