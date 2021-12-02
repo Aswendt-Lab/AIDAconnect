@@ -5,7 +5,8 @@ function plotGlobalParameter(inputFMRI, graphCell, strParameter)
 
 % Input Arguments
 % inputFMRI and graphCell from mergeFMRIdata_input.m
-% strParameter = 'Density', 'Transitivity', 'Efficiency', 'Assortativity', 'Modularity', 'charPathLength', 'smallWorldness' 
+% strParameter = 'Density', 'Transitivity', 'Efficiency', 'Assortativity', 
+%                'Modularity', 'charPathLength', 'smallWorldness', 'overallconnectivity' 
 
 %% Example
 % plotGlobalParameter(inputFMRI, graphCell, 'Modularity') 

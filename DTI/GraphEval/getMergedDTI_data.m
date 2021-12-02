@@ -1,4 +1,4 @@
-function getMergedDTI_data(dtiStruct,thres)
+function getMergedDTI_data(dtiStruct,thres_type,thres)
 
 %% getMergedDTI_data
 % This function is used by mergeFMRIdata_input.m and is not meant to be
@@ -39,6 +39,7 @@ for d = 1:length(days)
         charPathLength =            nan(1,length(matFile_cur));
         charPathLength_rand =       nan(1,length(matFile_cur));
         charPathLength_normalized = nan(1,length(matFile_cur));
+        overallConnectivity =       zeros(1,length(matFile_cur));
 
         if length(matFile_cur)<1
             error('There is no content in the given path!');
@@ -66,14 +67,20 @@ for d = 1:length(days)
             current_matAll(current_matAll<=0) = 0;
             
             % Apply the threshold for the number of fibers
-            threshold = mean(current_matAll)*thres;
-            current_matAll(current_matAll<threshold) = 0;
+            switch(thres_type)
+                case 0 % Fixed threshold
+                    threshold = mean(current_matAll)*thres;
+                    current_matAll(current_matAll<threshold) = 0;
+                case 1 % Density-based threshold
+                    current_matAll(:,:,i) = threshold_proportional(current_matAll(:,:,i),thres);
+            end
          
             % Ensure there are no self-connections
             for ii = 1:size(current_matAll,1)
                 current_matAll(ii,ii,i) = 0;
             end 
             current_mat = current_matAll(:,:,i);
+            overallConnectivity(i) = mean(current_mat, 'all');
             
             % Hint: 
             % The calculations of the following metrics using BCT
@@ -171,6 +178,7 @@ for d = 1:length(days)
         clustercoef_normalized(:,i) = nanmean(clustercoef(:,i),2)./nanmean(clustercoef_rand(:,i),2);
         charPathLength_normalized(i) = charPathLength(i)/charPathLength_rand(i);        
         infoDTI.smallWorldness = (clustercoef_normalized(:,i)/charPathLength_normalized(i))';
+        infoDTI.overallConnectivity = overallConnectivity;
         
         %infoDTI.smallWorldness = (nanmean(clustercoef(:,i),2)/charPathLength(i))';
         
