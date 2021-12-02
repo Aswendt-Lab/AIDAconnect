@@ -6,7 +6,7 @@ function plotGlobalParameter(inputDTI, graphCell, strParameter)
 % Input Arguments
 % inputDTI and graphCell from mergeDTIdata_input.m
 % strParameter = 'Density', 'Transitivity', 'Efficiency', 'Assortativity', 
-%                'Modularity', 'charPathLength', 'smallWorldness', 'overallconnectivity' 
+%                'Modularity', 'charPathLength', 'smallWorldness' 
 
 %% Example
 % plotGlobalParameter(inputDTI, graphCell, 'Density') 
@@ -52,10 +52,6 @@ for gIdx=1:numOfGroups
             case 'smallworldness'
                 tempFile = load(fullfile(path,groups(gIdx),[char(days(dIdx)) '.mat']));
                 currValues = tempFile.infoDTI.smallWorldness;
-                valuesGroup{gIdx}(1:size(currValues,2),dIdx) = currValues;
-            case 'overallconnectivity'
-                tempFile = load(fullfile(path,groups(gIdx),[char(days(dIdx)) '.mat']));
-                currValues = tempFile.infoDTI.overallConnectivity;
                 valuesGroup{gIdx}(1:size(currValues,2),dIdx) = currValues;
             otherwise
                 error('No valid Argument')
