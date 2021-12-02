@@ -1,4 +1,4 @@
-function getMergedFMRI_data(fmriStruct,thres)
+function getMergedFMRI_data(fmriStruct,thres_type,thres)
 
 %% getMergedFMRI_data
 % This function is used by mergeFMRIdata_input.m and is not meant to be
@@ -68,10 +68,18 @@ for d = 1:length(days)
             
             [coMat(:,:,i),labels] = matrixMaker_rsfMRI((fullfile(matFile_cur(i).folder,matFile_cur(i).name)));
             current_matAll = abs(coMat); % Absolute values of the matrices
-            current_matAll(current_matAll<thres) = 0; % Threshold for correlations
             
+            % Threshold for correlations
+            switch(thres_type)
+                case 0 % Fixed threshold
+                    current_matAll(current_matAll<thres) = 0; 
+                case 1 % Density-based threshold
+                    current_matAll(:,:,i) = threshold_proportional(current_matAll(:,:,i),thres);
+            end
+            
+            % Ensure there are no self-connections
             for ii = 1:size(current_matAll,1)
-                current_matAll(ii,ii,i) = 0; % Ensure there are no self-connections
+                current_matAll(ii,ii,i) = 0; 
             end
             current_mat = current_matAll(:,:,i);
             overallConnectivity(i) = mean(current_mat, 'all');

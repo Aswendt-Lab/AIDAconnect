@@ -13,8 +13,13 @@ inputDTI.days = ["Baseline","P7","P14","P28","P42","P56"];
 % Groups (e.g. "Sham" etc.)
 inputDTI.groups = ["Group1", "Group2"];
 
+% Threshold Type (0: Fixed, 1: Density-based)
+thres_type = 1;
+
 % Threshold (0-1)
-thres = 0;
+% For the Density-based threshold, this is the proportion of
+% the biggest weights to preserve
+thres = 0.8;
 
 % Output path 
 inputDTI.out_path = "/Volumes/path/to/desired/output";
@@ -29,7 +34,7 @@ addpath('../Tools/NIfTI/')
 addpath('./GraphEval/')
 if ~exist(inputDTI.out_path,'dir')
     mkdir(inputDTI.out_path)
-    getMergedDTI_data(inputDTI,thres);
+    getMergedDTI_data(inputDTI,thres_type,thres);
 end
 [graphCell,matrixValues,ids]=graphAnalysis_DTI(inputDTI);
 acronyms = load('../Tools/infoData/acronyms_splitted.mat').acronyms;

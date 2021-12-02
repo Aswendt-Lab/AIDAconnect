@@ -13,8 +13,13 @@ inputFMRI.days = ["Baseline","P7","P14","P28","P42","P56"];
 % Groups e.g. “Sham” etc.
 inputFMRI.groups = ["Group1", "Group2"];
 
-% Threshold 
-thres = 0.1;
+% Threshold Type (0: Fixed, 1: Density-based)
+thres_type = 1;
+
+% Threshold (0-1)
+% For the Density-based threshold, this is the proportion of
+% the biggest weights to preserve
+thres = 0.8;
  
 % Output path 
 inputFMRI.out_path = "/Volumes/path/to/desired/output";
@@ -29,7 +34,7 @@ addpath('../Tools/NIfTI/')
 addpath('./rsfMRI_Processing/')
 if ~exist(inputFMRI.out_path,'dir')
     mkdir(inputFMRI.out_path)  
-    getMergedFMRI_data(inputFMRI,thres);
+    getMergedFMRI_data(inputFMRI,thres_type,thres);
 end
 [graphCell,matrixValues,ids]=graphAnalysis_fMRI(inputFMRI);
 acronyms = load('../Tools/infoData/acronyms_splitted.mat').acronyms;
