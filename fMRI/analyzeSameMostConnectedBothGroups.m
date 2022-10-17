@@ -20,7 +20,7 @@ Sides = ["L ","R "]; % Sides of Region-suffix to analyze
 NRegions2analyze = 5; % Finds the N most connected regions
 
 %% Examples
-% analyzeSameMostConnectedBothGroups(inputFMRI, "SSs", "P21", "/Users/Username/Desktop/Files")
+% analyzeSameMostConnectedBothGroups(inputFMRI, "SSs", "P21", "\Users\Username\Desktop\Files")
 % analyzeSameMostConnectedBothGroups(inputFMRI, "SSs", "P21")
 % Remember to replace the path with an existing path or to just leave it out
 
@@ -40,10 +40,10 @@ end
 inputFMRI.days = [day];
 
 % Add path to use getTotalData.m
-addpath('./rsfMRI_Processing/')
+addpath('.\rsfMRI_Processing\')
 
 % Load acronyms
-acronyms = load('../Tools/infoData/acronyms_splitted.mat').acronyms;
+acronyms = load('..\Tools\infoData\acronyms_splitted.mat').acronyms;
 numberOfRegions = size(acronyms,1);
 
 % Find and analyze the N most connected regions
@@ -104,7 +104,7 @@ bothGroupsTable.Properties.VariableNames{'Var4'} = 'Weight R Mean';
 display(bothGroupsTable);
 
 if inputFMRI.save == 1
-    writetable(bothGroupsTable,out_path+'/analyzeSameMostConnectedBothGroups.csv');
-    disp('Table saved to '+out_path+'/analyzeSameMostConnectedBothGroups.csv');
+    writetable(bothGroupsTable,out_path+'\analyzeSameMostConnectedBothGroups.csv');
+    disp('Table saved to '+out_path+'\analyzeSameMostConnectedBothGroups.csv');
 end
 

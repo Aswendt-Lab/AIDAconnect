@@ -19,7 +19,7 @@ path = inputFMRI.out_path;
 numOfDays = size(inputFMRI.days,2);
 numOfGroups = size(inputFMRI.groups,2);
 valuesGroup = cell(1,numOfGroups);
-addpath('./rsfMRI_Processing/');
+addpath('.\rsfMRI_Processing\');
 
 for gIdx=1:numOfGroups
     valuesGroup{gIdx} = nan(size(graphCell{gIdx,1}.Nodes.allMatrix,3),numOfDays);

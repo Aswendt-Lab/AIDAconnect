@@ -5,7 +5,7 @@
 
 %% Specifications
 
-filename =  "/Users/Username/Documents/Projects/proc_data/outputFMRI/GroupName1/Baseline.mat"; % path to a processed MAT-File
+filename =  "N:\Student_projects\14_Aref_Kalantari_2021\Projects\CRC_WP1\proc_data_sorted_timeline_2\outputFMRI\Stroke\P7.mat"; % path to a processed MAT-File
 selectedRegions = ["L SSp-ll", "L HIP", "R HIP", "L DORpm", "R DORpm", "L lfbst", "R DORsm"]; % defines regions to be shown (as in acronyms)
 clims = [0, 0.6]; % dynamic range of plot, e.g.: [0, 1] -> correlations between 0 and 1 can be displayed with different colors
 
@@ -14,7 +14,7 @@ clims = [0, 0.6]; % dynamic range of plot, e.g.: [0, 1] -> correlations between 
 P = load(filename);
 infoFMRI = P.infoFMRI;
 
-load('../Tools/infoData/acronyms_splitted.mat');
+load('..\Tools\infoData\acronyms_splitted.mat');
 numberOfSubjects = size(infoFMRI.names,1);
 
 % Determine number of subplots

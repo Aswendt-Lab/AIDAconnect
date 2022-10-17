@@ -12,7 +12,7 @@ function compareTotalDegree(inputFMRI, graphCell, day1, day2, out_path)
 % out_path = Output path of the plot
 
 %% Examples
-% compareTotalDegree(inputFMRI, graphCell, 2, 4, "/Users/Username/Desktop")
+% compareTotalDegree(inputFMRI, graphCell, 2, 4, "\Users\Username\Desktop")
 % compareTotalDegree(inputFMRI, graphCell, 2, 4)
 % Remember to replace the path with an existing path or to just leave it out
 
@@ -73,8 +73,8 @@ xlabel('Days');
 if inputFMRI.save == 1
     fig = gcf;
     fig.PaperPositionMode = 'auto';
-    print([out_path+'/DifferenceDegreeGroup'], '-dpdf', '-fillpage')
-    disp('Figure saved to '+out_path+'/DifferenceDegreeGroup.pdf');
+    print([out_path+'\DifferenceDegreeGroup'], '-dpdf', '-fillpage')
+    disp('Figure saved to '+out_path+'\DifferenceDegreeGroup.pdf');
 end
 
 end

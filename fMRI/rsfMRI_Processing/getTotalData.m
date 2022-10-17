@@ -7,7 +7,7 @@ function [OutStruct]=getTotalData(inputFMRI)
 path  = inputFMRI.out_path;
 groups = inputFMRI.groups;
 days = inputFMRI.days;
-tempFile = load('../Tools/infoData/acronyms_splitted.mat');
+tempFile = load('..\Tools\infoData\acronyms_splitted.mat');
 acronyms = tempFile.acronyms;
 
 numOfRegions = length(inputFMRI.index);
@@ -19,7 +19,7 @@ Cat=[];
 for d = 1:length(days)
     for g = 1:length(groups)
         cur_path = char(fullfile(path,groups(g)));
-        matFile_cur = ([cur_path '/' char(days(d)) '.mat']);
+        matFile_cur = ([cur_path '\' char(days(d)) '.mat']);
         load(matFile_cur, 'infoFMRI');              
         [p, q, o]=size(infoFMRI.matrix(index,index,:));        
         TotalData(1:p,1:q,1:o,d,g)=squeeze(infoFMRI.matrix(index,index,:)); 

@@ -8,7 +8,7 @@ function plotStrokeSize_Percent(filename)
 % filename = Path to a processed T2 MAT-file (as String)
 
 %% Example
-% plotStrokeSize_Percent('/Volumes/MRI/proc_data/out_path/T2/Group1/P1.mat')
+% plotStrokeSize_Percent('\Volumes\MRI\proc_data\out_path\T2\Group1\P1.mat')
 % Remember to replace the path with an existing path 
 
 %% Do not modify the following lines

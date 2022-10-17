@@ -19,7 +19,7 @@ for i = 1:length(titStr)
         'EdgeColor', '#696969'); %'EdgeLabel',round(G_stroke{i}.Edges.Weight));
     graphCell{i}.Nodes.allStrength(graphCell{i}.Nodes.allStrength==0)=1;
     if displayOptions == 1
-        p_R.MarkerSize = 15*mean(graphCell{i}.Nodes.allStrength,2)/mean(max(graphCell{i}.Nodes.allStrength));
+        p_R.MarkerSize = 15*mean(graphCell{i}.Nodes.allStrength,2)\mean(max(graphCell{i}.Nodes.allStrength));
     else
         p_R.MarkerSize = 15;
     end

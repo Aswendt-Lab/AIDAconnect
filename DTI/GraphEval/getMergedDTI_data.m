@@ -4,12 +4,12 @@ function getMergedDTI_data(dtiStruct,thres_type,thres)
 % This function is used by mergeFMRIdata_input.m and is not meant to be
 % used manually. It merges all given DTI-connectivity-.mat-files. 
 
-addpath('../Tools/BCT');
+addpath('..\Tools\BCT');
 path  = dtiStruct.in_path;
 groups = dtiStruct.groups;
 days = dtiStruct.days;
 out_path = dtiStruct.out_path;
-tempF = load('../Tools/infoData/acro_numbers_splitted.mat');
+tempF = load('..\Tools\infoData\acro_numbers_splitted.mat');
 acroNum = tempF.annotationsNumber;
 numOfRegions = size(acroNum,1);
 
@@ -17,7 +17,7 @@ for d = 1:length(days)
     for g = 1:length(groups)
         disp('Processing '+days(d)+': '+groups(g)+' ...');     
         cur_path = char(fullfile(path,days(d),groups(g)));
-        matFile_cur = dir([cur_path '/*/DTI/connectivity/*rsfMRISplit*pass.connectivity.mat']);       
+        matFile_cur = dir([cur_path '\*\DTI\connectivity\*rsfMRISplit*pass.connectivity.mat']);       
         infoDTI = struct();
         coMat=zeros(numOfRegions,numOfRegions,length(matFile_cur));
         namesOfMat = cell(length(matFile_cur),1);
@@ -45,11 +45,11 @@ for d = 1:length(days)
             error('There is no content in the given path!');
         end
               
-        adfile_cur = dir([cur_path '/*/DTI/DSI_studio/*ad.nii.gz']);
-        fa0file_cur = dir([cur_path '/*/DTI/DSI_studio/*fa0.nii.gz']);
-        mdfile_cur = dir([cur_path '/*/DTI/DSI_studio/*md.nii.gz']);
-        rdfile_cur = dir([cur_path '/*/DTI/DSI_studio/*rd.nii.gz']);
-        arafile_cur = dir([cur_path '/*/DTI/DSI_studio/*rsfMRISplit_scaled.nii.gz']);
+        adfile_cur = dir([cur_path '\*\DTI\DSI_studio\*ad.nii.gz']);
+        fa0file_cur = dir([cur_path '\*\DTI\DSI_studio\*fa0.nii.gz']);
+        mdfile_cur = dir([cur_path '\*\DTI\DSI_studio\*md.nii.gz']);
+        rdfile_cur = dir([cur_path '\*\DTI\DSI_studio\*rd.nii.gz']);
+        arafile_cur = dir([cur_path '\*\DTI\DSI_studio\*rsfMRISplit_scaled.nii.gz']);
         ad = nan(length(matFile_cur),numOfRegions);
         fa0 = nan(length(matFile_cur),numOfRegions);
         md = nan(length(matFile_cur),numOfRegions);
@@ -142,6 +142,7 @@ for d = 1:length(days)
             rdimg = rdNii.img;
             araimg = araNii.img;
             for r = 1:numOfRegions
+              
                 ad(i,r)=mean(adimg(araimg==acroNum(r)));
                 fa0(i,r)=mean(fa0img(araimg==acroNum(r)));
                 md(i,r)=mean(mdimg(araimg==acroNum(r)));

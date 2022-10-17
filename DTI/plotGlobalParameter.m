@@ -19,7 +19,7 @@ path = inputDTI.out_path;
 numOfDays = size(days,2);
 numOfGroups = size(groups,2);
 valuesGroup = cell(1,numOfGroups);
-addpath('./GraphEval/');
+addpath('.\GraphEval\');
 
 for gIdx=1:numOfGroups
     valuesGroup{gIdx} = nan(size(graphCell{gIdx,1}.Nodes.allMatrix,3),numOfDays);

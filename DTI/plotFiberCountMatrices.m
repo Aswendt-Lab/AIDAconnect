@@ -3,9 +3,9 @@
 % plots (figure 1) and their mean values and standard deviation (figure 2). 
 % Please adjust the parameters in lines 8 - 10 and hit 'Run'.
 
-%% Specifications
+%% Specification
 
-filename = "/Users/Username/Documents/Projects/proc_data/outputDTI/GroupName1/Baseline.mat"; % path to a processed MAT-File
+filename = "N:\Student_projects\14_Aref_Kalantari_2021\Projects\CRC_WP1\proc_data_sorted_timeline_2\OutputDTI\Stroke\Baseline.mat"; % path to a processed MAT-File
 selectedRegions = ["L SSp-ll", "L HIP", "R HIP", "L DORpm", "R DORpm", "L lfbst", "R DORsm"]; % defines regions to be shown (as in acronyms)
 clims = [0, 1000]; % dynamic range of plot, e.g.: [0, 1000] -> Number of fibers between 0 and 1000 can be displayed with different colors
 
@@ -14,7 +14,7 @@ clims = [0, 1000]; % dynamic range of plot, e.g.: [0, 1000] -> Number of fibers 
 P = load(filename);
 infoDTI = P.infoDTI;
 
-load('../Tools/infoData/acronyms_splitted.mat');
+load('..\Tools\infoData\acronyms_splitted.mat');
 numberOfSubjects = size(infoDTI.names,1);
 
 % Determine number of subplots

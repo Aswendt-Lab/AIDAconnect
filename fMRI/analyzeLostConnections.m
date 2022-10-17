@@ -21,7 +21,7 @@ threshold = 0;
 
 %% Do not modify the following lines
 
-load('../Tools/infoData/acronyms_splitted.mat');
+load('..\Tools\infoData\acronyms_splitted.mat');
 
 % Convert days to the index number of inputFMRI
 dayI = find(inputFMRI.days == day1);
@@ -41,7 +41,7 @@ for group_id = 1:size(inputFMRI.groups,2)
     zeroIndices = find(allConnectionsII==0);
     % Regarding these connections only, find all that were existent at 
     % the first day:
-    % nonZeroLogical returns a list of logical expressions (1/0) for all 
+    % nonZeroLogical returns a list of logical expressions (1\0) for all 
     % given non-existing connections from zeroIndices that were existent 
     % previously (not equals 0). nonZeroIndices then returns 
     % all connections from zeroIndices using this list of logical 

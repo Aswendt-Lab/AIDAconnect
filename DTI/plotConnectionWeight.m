@@ -17,9 +17,9 @@ days = inputDTI.days;
 groups = inputDTI.groups;
 numOfDays = size(inputDTI.days,2);
 numOfGroups = size(inputDTI.groups,2);
-tempFile = load('../Tools/infoData/acronyms_splitted.mat');
+tempFile = load('..\Tools\infoData\acronyms_splitted.mat');
 acronyms = tempFile.acronyms;
-addpath('./GraphEval/');
+addpath('.\GraphEval\');
 
 valuesGroup1 = nan(size(graphCell{1,1}.Nodes.allMatrix,3),numOfDays);
 for day=1:numOfDays
@@ -70,6 +70,6 @@ disp(strcat("Edge Weight from ",startP," to ",endP," in group ",inputDTI.groups(
 disp(tableGroup2);
 
 valuesGroup = {valuesGroup1, valuesGroup2};
-plotFigure(days, groups, valuesGroup);
+plotFigure([startP '  <->  ' endP],days, groups, valuesGroup);
 title([startP '  <->  ' endP]);
 ylabel('Number of Fibers');

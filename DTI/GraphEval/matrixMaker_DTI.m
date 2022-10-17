@@ -11,7 +11,7 @@ else
     var_plot=1;
 end
 
-addpath('./GraphEval/');
+addpath('.\GraphEval\');
 [dataPath,filename]=fileparts(mat_file);
 filename = strsplit(filename,'.');
 

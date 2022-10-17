@@ -17,9 +17,9 @@ days = inputFMRI.days;
 groups = inputFMRI.groups;
 numOfDays = size(inputFMRI.days,2);
 numOfGroups =  size(inputFMRI.groups,2);
-tempFile = load('../Tools/infoData/acronyms_splitted.mat');
+tempFile = load('..\Tools\infoData\acronyms_splitted.mat');
 acronyms = tempFile.acronyms;
-addpath('./rsfMRI_Processing/');
+addpath('.\rsfMRI_Processing\');
 
 valuesGroup1 = nan(size(graphCell{1,1}.Nodes.allMatrix,3),numOfDays);
 for day=1:numOfDays

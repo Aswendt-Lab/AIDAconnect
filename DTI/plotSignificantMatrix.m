@@ -13,7 +13,7 @@ function plotSignificantMatrix(inputDTI, day, out_path)
 
 
 %% Examples
-% plotSignificantMatrix(inputDTI, "P28", "/Users/Username/Desktop")
+% plotSignificantMatrix(inputDTI, "P28", "\Users\Username\Desktop")
 % plotSignificantMatrix(inputDTI, "P28")
 % Remember to replace the path with an existing path or to just leave it out
 
@@ -31,8 +31,8 @@ else
 end 
 
 % Generate Matrix of significant connections
-addpath('./GraphEval/')
-acronyms = load('../Tools/infoData/acronyms_splitted.mat').acronyms;
+addpath('.\GraphEval\')
+acronyms = load('..\Tools\infoData\acronyms_splitted.mat').acronyms;
 numOfRegions = size(acronyms,1);
 inputDTI.index = 1:numOfRegions;
 [OutStruct] = getTotalData(inputDTI);
@@ -55,7 +55,7 @@ xtickangle(45);
 if inputDTI.save == 1
     fig = gcf;
     fig.PaperPositionMode = 'auto';
-    print([char(out_path), '/significantConn'], '-dpdf', '-fillpage');
-    disp('Figure saved to '+out_path+'/significantConn.pdf');
+    print([char(out_path), '\significantConn'], '-dpdf', '-fillpage');
+    disp('Figure saved to '+out_path+'\significantConn.pdf');
 end
 

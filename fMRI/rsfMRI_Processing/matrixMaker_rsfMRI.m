@@ -5,8 +5,8 @@ function [mNet,labelsData] = matrixMaker_rsfMRI(mat_file,varargin)
 % used manually. It creates matrices from raw .mat-files of the
 % rsfMRI-measurement.
 
-addpath('../Tools/FSLNets')                  
-addpath('../Tools/BCT');
+addpath('..\Tools\FSLNets')                  
+addpath('..\Tools\BCT');
 
 if nargin==2
     var_plot=varargin{1};

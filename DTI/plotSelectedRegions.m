@@ -23,7 +23,7 @@ displayOptions = 1;
 %% Do not modify the following lines
 % Generate graph plot for the selected regions and determine limit values
 
-addpath(genpath('./GraphEval'))
+addpath(genpath('.\GraphEval'))
 
 minDegreeAll = zeros(length(inputDTI.groups),length(inputDTI.days));
 maxDegreeAll = minDegreeAll;

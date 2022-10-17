@@ -4,7 +4,7 @@ function getMergedFMRI_data(fmriStruct,thres_type,thres)
 % This function is used by mergeFMRIdata_input.m and is not meant to be
 % used manually. It merges all given rsfMRI-connectivity-.mat-files. 
 
-addpath('../Tools/BCT');
+addpath('..\Tools\BCT');
 path  = fmriStruct.in_path;
 groups = fmriStruct.groups;
 days = fmriStruct.days;
@@ -16,10 +16,10 @@ for d = 1:length(days)
     for g = 1:length(groups)
         disp('Processing '+days(d)+': '+groups(g)+' ...');       
         cur_path = char(fullfile(path,days(d),groups(g)));
-        matFile_cur = dir([cur_path '/*/fMRI/regr/MasksTCsSplit*txt.mat']);
+        matFile_cur = dir([cur_path '\*\fMRI\regr\MasksTCsSplit*txt.mat']);
         % Random Sample Check
         randomSubject = randsample(1:size(matFile_cur,1),1);
-        randomSubjectPath = strcat(matFile_cur(randomSubject,1).folder,'/',matFile_cur(randomSubject,1).name);
+        randomSubjectPath = strcat(matFile_cur(randomSubject,1).folder,'\',matFile_cur(randomSubject,1).name);
         matFile_cur_temp = load(randomSubjectPath);
         numOfRegions_all(j) = size(matFile_cur_temp.label,1);
         if j-1 ~= 1 && numOfRegions_all(j) ~= numOfRegions_all(j-1)
@@ -163,7 +163,7 @@ for d = 1:length(days)
         infoFMRI.smallWorldness = (clustercoef_normalized(:,i)/charPathLength_normalized(i))';
         infoFMRI.overallConnectivity = overallConnectivity;
         
-        %infoFMRI.smallWorldness = (nanmean(clustercoef(:,i),2)/charPathLength(i))';
+        %infoFMRI.smallWorldness = (nanmean(clustercoef(:,i),2)\charPathLength(i))';
    
         targetPath = fullfile(out_path,groups(g));
         if ~exist(targetPath,'dir')
