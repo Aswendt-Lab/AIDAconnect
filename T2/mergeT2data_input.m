@@ -5,15 +5,15 @@
 %% Specifications
 
 % Path to the processed image data folder (e.g. proc_data)
-inputT2.in_path = "N:\Student_projects\14_Aref_Kalantari_2021\Projects\CRC_WP1\proc_data_sorted_timeline_2";
+inputT2.in_path = "Z:\Student_projects\14_Aref_Kalantari_2021\Projects\CRC_WP1\inputs\mri\proc_data";
 % Observation days (e.g. "P1" etc.)
-inputT2.days = ["Baseline","P7","P14","P28"]; 
+inputT2.days = ["P7"]; 
 
 % Groups (e.g. "Sham" etc.)
-inputT2.groups = ["Sham","Stroke"];
+inputT2.groups = ["StrokeGood","StrokeBad"];
 
 % Output path
-inputT2.out_path = "C:\Users\aswen\Documents\Data\CRC_WP1\outputs\AIDAconnet_results\outputFMRI_DensityBased_85percent_SliceTimeCorrected_data";
+inputT2.out_path = "Z:\Student_projects\14_Aref_Kalantari_2021\Projects\CRC_WP1\outputs\Matlab\T2Output";
 
 %% Do not modify the following lines
 % This Script tests the existence of the output path and consolidates all

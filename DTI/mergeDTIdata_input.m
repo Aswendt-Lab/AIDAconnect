@@ -1,27 +1,29 @@
 %% First Steps
 % Consolidates all graph-theoretical measures of the processed DTI-data. 
 % Please specify all information below and hit 'Run'.
+
 %% Specifications
 
 % Path to the processed image data folder (e.g. proc_data)
-inputDTI.in_path =  "C:\Users\aswen\Desktop\TestingFolder\Test_dataset\docker_pc_version2";
+inputDTI.in_path = "Y:\Desktop\Data\CRC_WP1\inputs\mri\proc_data";
 
 % Observation days (e.g. "P1" etc.)
-inputDTI.days = ["P1", "P2"]; 
+inputDTI.days = ["Baseline","P1","P7","P14","P21","P28"]; 
+%inputDTI.days = ["Baseline","P1","P7","P14","P21","P28"]; 
 
 % Groups (e.g. "Sham" etc.)
-%inputDTI.groups = ["S1"];
-inputDTI.groups = ["S1"];
+inputDTI.groups = ["StrokeBad","Sham"];
+
 % Threshold Type (0: Fixed, 1: Density-based)
-thres_type = 1;
+thres_type = 0;
 
 % Threshold (0-1)
 % For the Density-based threshold, this is the proportion of
 % the biggest weights to preserve
-thres = 0.3;
+thres = 0;
 
 % Output path 
-inputDTI.out_path =  "C:\Users\aswen\Desktop\TestingFolder\Test_dataset\docker_pc_version2\DTIoutput";
+inputDTI.out_path =  "Y:\Desktop\Data\CRC_WP1\inputs\mri\proc_data\Results\AIDAconnect\OutputDTI_thres0";
 %% Do not modify the following lines
 % This script tests the existence of the output path and consolidates all
 % data only if the path does not exist. If the path already exists only

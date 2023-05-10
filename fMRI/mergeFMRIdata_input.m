@@ -5,24 +5,25 @@
 %% Specifications
 
 % Path to the processed image data folder (e.g. proc_data)
-inputFMRI.in_path = "C:\Users\aswen\Documents\Data\CRC_WP1\inputs\mri\proc_data"
+inputFMRI.in_path = "D:\DataForFranzi\proc_data_processed"
 
 % Observation days e.g. “P1" etc.
 inputFMRI.days = ["Baseline","P1","P7","P14","P21","P28"];
 
 % Groups e.g. “Sham” etc.
-inputFMRI.groups = ["StrokeBad","Sham"];
-inputFMRI.groups = ["StrokeBad","StrokeGood"];
+inputFMRI.groups = ["Sham", "StrokeGood","StrokeBad"];
+
 % Threshold Type (0: Fixed, 1: Density-based)
-thres_type = 1;
+thres_type = 0;
 
 % Threshold (0-1)
 % For the Density-based threshold, this is the proportion of
 % the biggest weights to preserve
-thres = 0.3;
+thres = 0.1;
  
 % Output path 
-inputFMRI.out_path = "C:\Users\aswen\Documents\Data\CRC_WP1\outputs\AIDAconnet_results\outputFMRI_FixedBased_10percent_SliceTimeCorrected_data";
+inputFMRI.out_path = "C:\Users\aswen\Documents\Data\CRC_WP1\outputs\AIDAconnet_results\outputFMRI_01thresh";
+
 %% Do not modify the following lines
 % This Script tests the existence of the output path and consolidates all
 % data only if the path does not exist. If the path already exists only

@@ -1,4 +1,4 @@
-function getMergedFMRI_data(fmriStruct,thres_type,thres)
+function infoFMRI = getMergedFMRI_data(fmriStruct,thres_type,thres)
 
 %% getMergedFMRI_data
 % This function is used by mergeFMRIdata_input.m and is not meant to be
@@ -171,7 +171,7 @@ for d = 1:length(days)
         end
         disp(strcat(targetPath,filesep,days(d),'.mat'))
         disp(infoFMRI.names)
-        save(strcat(targetPath,filesep,days(d),'.mat'),'infoFMRI')
+        save(strcat(targetPath,filesep,days(d),'_',string(thres),'.mat'),'infoFMRI')
         j = j+1;
     end
 end
