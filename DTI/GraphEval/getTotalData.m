@@ -7,7 +7,7 @@ function [OutStruct]=getTotalData(inputDTI)
 path  = inputDTI.out_path;
 groups = inputDTI.groups;
 days = inputDTI.days;
-tempFile = load('../Tools/infoData/acronyms_splitted.mat');
+tempFile = load('..\Tools\infoData\acronyms_splitted.mat');
 acronyms = tempFile.acronyms;
 
 numOfRegions = length(inputDTI.index);
@@ -19,7 +19,7 @@ Cat=[];
 for d = 1:length(days)
     for g = 1:length(groups)
         cur_path = char(fullfile(path,groups(g)));
-        matFile_cur = ([cur_path '/' char(days(d)) '.mat']);
+        matFile_cur = ([cur_path '\' char(days(d)) '.mat']);
         load(matFile_cur, 'infoDTI');             
         [p, q, o]=size(infoDTI.matrix(index,index,:));       
         TotalData(1:p,1:q,1:o,d,g)=squeeze(infoDTI.matrix(index,index,:)); 

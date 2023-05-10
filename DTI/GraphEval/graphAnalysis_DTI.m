@@ -8,11 +8,11 @@ path = inputDTI.out_path;
 groups = inputDTI.groups;
 days = inputDTI.days;
 %% Load related information
-tempFile = load('../Tools/infoData/acronyms_splitted.mat');
+tempFile = load('..\Tools\infoData\acronyms_splitted.mat');
 acronyms = tempFile.acronyms;
-tempFile = load('../Tools/infoData/acro_numbers_splitted.mat');
+tempFile = load('..\Tools\infoData\acro_numbers_splitted.mat');
 acro_numbers = tempFile.annotationsNumber;
-niiData = load_nii('../Tools/infoData/annoVolume+2000_rsfMRI.nii.gz');
+niiData = load_nii('..\Tools\infoData\annoVolume+2000_rsfMRI.nii.gz');
 volume = niiData.img;
 %% Find center of gravity for existing labels
 x_coord = nan(length(acro_numbers),1);

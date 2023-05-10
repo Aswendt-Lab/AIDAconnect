@@ -16,10 +16,10 @@ displayOptions = 0;
 % displayOptions = 0 -> Displays the nodes and connections without differences in size
 exportTable = 1;
 exportFigure = 0;
-% exportTable/Figure: Enter a 1 to export the table and/or figure. 
+% exportTable\Figure: Enter a 1 to export the table and\or figure. 
 % Do not forget to specify an output path in this case.
 %% Examples
-% analyzeMostConnected(inputFMRI, graphCell, "SSs", "P28", "/Users/Username/Desktop/Files")
+% analyzeMostConnected(inputFMRI, graphCell, "SSs", "P28", "\Users\Username\Desktop\Files")
 % analyzeMostConnected(inputFMRI, graphCell, "SSs", "P28")
 % Remember to replace the path with an existing path or to just leave it out
 
@@ -29,7 +29,7 @@ if nargin == 4
     inputFMRI.save = 0;
     out_path = "";
 else
-    inputFMRI.save = 1; % control if figure/table should be saved
+    inputFMRI.save = 1; % control if figure\table should be saved
     if ~exist(out_path, 'dir')
         mkdir(out_path)
     end
@@ -39,10 +39,10 @@ end
 inputFMRI.days = [day]; 
 
 % Add path to use getTotalData.m
-addpath('./rsfMRI_Processing/')
+addpath('.\rsfMRI_Processing\')
 
 % Load acronyms
-load('../Tools/infoData/acronyms_splitted.mat');
+load('..\Tools\infoData\acronyms_splitted.mat');
 
 % Get number of regions
 numberOfRegions = size(graphCell{1}.Nodes,1);
@@ -107,7 +107,7 @@ subGraphCell{3}=subgraph(graphCell{2,dIdx},cellstr(plotRelevantRegions(:,3)));
 subGraphCell{4}=subgraph(graphCell{2,dIdx},cellstr(plotRelevantRegions(:,4)));
 
 % Remove all Edges except from the Seed Node
-for l = 1:4 % for all 4 plots (2 Groups + L/R)
+for l = 1:4 % for all 4 plots (2 Groups + L\R)
     for k = 1:NRegions2analyze % from all Start Nodes
         for m = 1:NRegions2analyze % to all End Nodes
             subGraphCell{l} = rmedge(subGraphCell{l},relevantRegionsGrouped(k,l),relevantRegionsGrouped(m,l));
@@ -202,18 +202,18 @@ end
 
 if inputFMRI.save == 1
     if exportTable == 1
-        writetable(groupTable,out_path+'/analyzeMostConnected.csv');
-        disp('Table saved to '+out_path+'/analyzeMostConnected.csv');
+        writetable(groupTable,out_path+'\analyzeMostConnected.csv');
+        disp('Table saved to '+out_path+'\analyzeMostConnected.csv');
     end
     if exportFigure == 1
         fig = h1;
         fig.PaperPositionMode = 'auto';
-        print([out_path+'/'+inputFMRI.groups(1)+'_'+RegionPF+'_'+day], '-dpdf', '-fillpage')
-        disp('Figure saved to '+out_path+'/'+inputFMRI.groups(1)+'_'+RegionPF+'_'+day+'.pdf');
+        print([out_path+'\'+inputFMRI.groups(1)+'_'+RegionPF+'_'+day], '-dpdf', '-fillpage')
+        disp('Figure saved to '+out_path+'\'+inputFMRI.groups(1)+'_'+RegionPF+'_'+day+'.pdf');
         fig = h2;
         fig.PaperPositionMode = 'auto';
-        print([out_path+'/'+inputFMRI.groups(2)+'_'+RegionPF+'_'+day], '-dpdf', '-fillpage')
-        disp('Figure saved to '+out_path+'/'+inputFMRI.groups(2)+'_'+RegionPF+'_'+day+'.pdf');
+        print([out_path+'\'+inputFMRI.groups(2)+'_'+RegionPF+'_'+day], '-dpdf', '-fillpage')
+        disp('Figure saved to '+out_path+'\'+inputFMRI.groups(2)+'_'+RegionPF+'_'+day+'.pdf');
     end
 end
 end

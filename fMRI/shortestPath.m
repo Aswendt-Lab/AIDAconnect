@@ -34,8 +34,8 @@ numberOfGroups = size(inputFMRI.groups,2);
 connMatrix = cell(1,numberOfGroups);
 invMatrix = cell(1,numberOfGroups);
 
-addpath('../Tools/BCT');
-load('../Tools/infoData/acronyms_splitted.mat');
+addpath('..\Tools\BCT');
+load('..\Tools\infoData\acronyms_splitted.mat');
 
 % Find the acronym-numbers of the specified regions
 RegIDstartNode = find(acronyms == startNode);

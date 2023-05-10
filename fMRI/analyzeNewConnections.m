@@ -21,7 +21,7 @@ threshold = 0;
 
 %% Do not modify the following lines
 
-load('../Tools/infoData/acronyms_splitted.mat');
+load('..\Tools\infoData\acronyms_splitted.mat');
 
 % Convert days to the index number of inputFMRI
 dayI = find(inputFMRI.days == day1);

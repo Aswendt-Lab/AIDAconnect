@@ -4,21 +4,21 @@ function [groupInfo,name] = dtigroup_load(indir,prefix)
 % This function is used by matrixMaker_DTI.m and is not meant to be
 % used manually.
 
-addpath('../Tools/BCT');
+addpath('..\Tools\BCT');
 groupInfo.name = [];
 d=dir(strcat(fullfile(indir,prefix),'*connectivity.mat'));
 Nsubjects=size(d,1);
 
 if contains(prefix,'rsfMRISplit')
-    dataTemplate=load('../Tools/infoData/annoVolume+2000_rsfMRI.mat');
+    dataTemplate=load('..\Tools\infoData\annoVolume+2000_rsfMRI.mat');
     refLabels = dataTemplate.annoVolume2000rsfMRI;
     annotations2getSize=dir(fullfile(fileparts(indir),'*AnnoSplit_rsfMRI.nii.gz'));
 elseif contains(prefix,'rsfMRI')
-    dataTemplate=load('../Tools/infoData/annoVolume.mat');
+    dataTemplate=load('..\Tools\infoData\annoVolume.mat');
     refLabels = dataTemplate.annoVolume;
     annotations2getSize=dir(fullfile(fileparts(indir),'*Anno_rsfMRI.nii.gz'));     
 else
-    dataTemplate=load('../Tools/infoData/labelsNames.mat');
+    dataTemplate=load('..\Tools\infoData\labelsNames.mat');
     refLabels = dataTemplate.ARAannotationR2000;
     annotations2getSize=dir(fullfile(fileparts(indir),'*AnnoSplit.nii.gz'));
 end
@@ -50,7 +50,7 @@ for i=1:2:Nsubjects
     connectivityFilled = zeroVec;
      
     %matStd = mean(std(connectivityFilled)); 
-    %connectivityFilled = threshold_absolute(connectivityFilled,matStd/2); 
+    %connectivityFilled = threshold_absolute(connectivityFilled,matStd\2); 
     sizeMatrix = get_RegionSizeDTI(annotations2getSize(ceil(i/2)),connectivityFilled)/10;
     connectivityFilled = ceil(connectivityFilled/mean(connectivityFilled(connectivityFilled>0))*100);%.*sizeMatrix);
    

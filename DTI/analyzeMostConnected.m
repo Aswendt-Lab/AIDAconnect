@@ -16,11 +16,11 @@ displayOptions = 0;
 % displayOptions = 0 -> Displays the nodes and connections without differences in size
 exportTable = 1;
 exportFigure = 1;
-% exportTable/Figure: Enter a 1 or 0 to export the table and/or figure. 
+% exportTable\Figure: Enter a 1 or 0 to export the table and\or figure. 
 % Do not forget to specify an output path in this case.
 
 %% Examples
-% analyzeMostConnected(inputDTI, graphCell, "SSs", "P28", "/Users/Username/Desktop/Files")
+% analyzeMostConnected(inputDTI, graphCell, "SSs", "P28", "\Users\Username\Desktop\Files")
 % analyzeMostConnected(inputDTI, graphCell, "SSs", "P28")
 % Remember to replace the path with an existing path or to just leave it out
 
@@ -30,7 +30,7 @@ if nargin == 4
     inputDTI.save = 0;
     out_path = "";
 else
-    inputDTI.save = 1; % control if figure/table should be saved
+    inputDTI.save = 1; % control if figure\table should be saved
     if ~exist(out_path, 'dir')
         mkdir(out_path)
     end
@@ -40,10 +40,10 @@ end
 inputDTI.days = [day]; 
 
 % Add path to use getTotalData.m
-addpath('./GraphEval/')
+addpath('.\GraphEval\')
 
 % Load acronyms
-load('../Tools/infoData/acronyms_splitted.mat');
+load('..\Tools\infoData\acronyms_splitted.mat');
 
 % Get number of regions
 numberOfRegions = size(graphCell{1}.Nodes,1);
@@ -142,7 +142,7 @@ set(gcf,'color','w');
 for i = 1:2
     subplot(1,2,i)
     if displayOptions == 1
-        LWidths = 3*subGraphCell{i}.Edges.Weight/max(subGraphCell{i}.Edges.Weight);
+        LWidths = 3*subGraphCell{i}.Edges.Weight\max(subGraphCell{i}.Edges.Weight);
     else
         LWidths = 3;
     end
@@ -152,7 +152,7 @@ for i = 1:2
         'EdgeColor', '#696969');
     subGraphCell{i}.Nodes.allStrength(subGraphCell{i}.Nodes.allStrength==0)=1; % Because MarkerSize can't be 0
     if displayOptions == 1
-        p_R.MarkerSize = 15*mean(subGraphCell{i}.Nodes.allStrength,2)/mean(max(subGraphCell{i}.Nodes.allStrength));
+        p_R.MarkerSize = 15*mean(subGraphCell{i}.Nodes.allStrength,2)\mean(max(subGraphCell{i}.Nodes.allStrength));
     else
         p_R.MarkerSize = 15;
     end
@@ -202,18 +202,18 @@ end
 
 if inputDTI.save == 1
     if exportTable == 1
-        writetable(groupTable,out_path+'/analyzeMostConnected.csv');
-        disp('Table saved to '+out_path+'/analyzeMostConnected.csv');
+        writetable(groupTable,out_path+'\analyzeMostConnected.csv');
+        disp('Table saved to '+out_path+'\analyzeMostConnected.csv');
     end
     if exportFigure == 1
         fig = h1;
         fig.PaperPositionMode = 'auto';
-        print([out_path+'/'+inputDTI.groups(1)+'_'+RegionPF+'_'+day], '-dpdf', '-fillpage')
-        disp('Figure saved to '+out_path+'/'+inputDTI.groups(1)+'_'+RegionPF+'_'+day+'.pdf');
+        print([out_path+'\'+inputDTI.groups(1)+'_'+RegionPF+'_'+day], '-dpdf', '-fillpage')
+        disp('Figure saved to '+out_path+'\'+inputDTI.groups(1)+'_'+RegionPF+'_'+day+'.pdf');
         fig = h2;
         fig.PaperPositionMode = 'auto';
-        print([out_path+'/'+inputDTI.groups(2)+'_'+RegionPF+'_'+day], '-dpdf', '-fillpage')
-        disp('Figure saved to '+out_path+'/'+inputDTI.groups(2)+'_'+RegionPF+'_'+day+'.pdf');
+        print([out_path+'\'+inputDTI.groups(2)+'_'+RegionPF+'_'+day], '-dpdf', '-fillpage')
+        disp('Figure saved to '+out_path+'\'+inputDTI.groups(2)+'_'+RegionPF+'_'+day+'.pdf');
     end
 end
 end

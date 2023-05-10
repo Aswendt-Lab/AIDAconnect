@@ -23,7 +23,7 @@ displayOptions = 0;
 %% Do not modify the following lines
 % Generate graph plot for the selected regions and determine limit values
 
-addpath(genpath('./rsfMRI_Processing'))
+addpath(genpath('.\rsfMRI_Processing'))
 
 minDegreeAll = zeros(length(inputFMRI.groups),length(inputFMRI.days));
 maxDegreeAll = minDegreeAll;

@@ -38,7 +38,7 @@ end
 hsv_colors(:,2) = hsv_saturation;
 hsv_colors(:,3) = hsv_value;
 rgb_colors = hsv2rgb(hsv_colors);
-% Display the boxplots (map the values to days/groups)
+% Display the boxplots (map the values to days\groups)
 % Create right grouping data G for groups
 G_Group=ones(numOfGroups*numOfDays,1);
 for ii=1:numOfGroups

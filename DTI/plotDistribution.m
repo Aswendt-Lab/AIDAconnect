@@ -5,7 +5,7 @@ function plotDistribution(inputDTI, graphCell, strParameter, day)
 % node strength (mean over all subjects) 
 % for all groups at a given time point. 
 % You can specify a value range in lines 16 and 17 to limit the range 
-% in the plot. Region's names whose degree/strength values are within that
+% in the plot. Region's names whose degree\strength values are within that
 % range are furthermore displayed in the Command Window.
 
 % Input Arguments
@@ -53,7 +53,7 @@ for i = 1:numOfGroups
     axes = ancestor(histo, 'axes');
     axes.XAxis.Exponent = 0;
     xtickformat('%.0f')
-    % Display all regions that have a degree/strength within a specified range
+    % Display all regions that have a degree\strength within a specified range
     valueIdxFiltered = groupMeanValues{i} >= lowerBound & groupMeanValues{i} <= upperBound;
     regionsNames = string(graphCell{i,dayIdx}.Nodes.Name(valueIdxFiltered));
     regionsValues = groupMeanValues{i}(valueIdxFiltered);

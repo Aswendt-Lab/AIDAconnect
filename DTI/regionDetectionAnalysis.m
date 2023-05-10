@@ -9,8 +9,8 @@
 
 threshold = 0;
 
-path_matrix1 = '/Users/Username/Documents/Projects/proc_data/outputDTI/GroupName1/Baseline.mat';
-path_matrix2 = '/Users/Username/Documents/Projects/proc_data/outputDTI/GroupName1/P7.mat';
+path_matrix1 = '\Volumes\AG_Aswendt_Projects\Student_projects\14_Aref_Kalantari_2021\Projects\CRC_WP1\proc_data_sorted_timeline_2\outputDTI\Stroke\P14.mat';
+path_matrix2 = '\Volumes\AG_Aswendt_Projects\Student_projects\14_Aref_Kalantari_2021\Projects\CRC_WP1\proc_data_sorted_timeline_2\outputDTI\Stroke\P28.mat';
 
 %% Do not modify the following lines
 
