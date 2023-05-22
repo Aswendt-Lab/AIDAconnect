@@ -5,7 +5,10 @@
 
 %% Specifications
 
-filename =  "C:\Users\marc\Documents\UniklinikArbeit\AIDAconnect_output\Treatment\Baseline.mat"; % path to a processed MAT-File
+filename =  "C:\Users\marc\Documents\UniklinikArbeit\Projekt_AIDAconnect\AIDAconnect_output_fmri\Control\Baseline.mat"; % path to a processed MAT-File
+minval = 0;
+maxval = 1;
+binarize_thresh = 0.1;
 clims = [0, 1]; % dynamic range of plot, e.g.: [0, 1] -> correlations between 0 and 1 can be displayed with different colors
 
 %% Do not modify the following lines
@@ -66,11 +69,11 @@ binarized_matrix = mean_matrix;
 for ii=1:depth
     for jj=1:rows
         for hh=1:cols
-            if mean_matrix(jj,hh,ii) < 0.1
-                mean_matrix(jj,hh,ii) = 0;
-                binarized_matrix(jj,hh,ii) = 0;
+            if mean_matrix(jj,hh,ii) < binarize_thresh
+                mean_matrix(jj,hh,ii) = minval;
+                binarized_matrix(jj,hh,ii) = minval;
             else 
-                binarized_matrix(jj,hh,ii) = 1;
+                binarized_matrix(jj,hh,ii) = maxval;
             end
         end
     end
@@ -87,7 +90,7 @@ set(gca, 'XTick', [1,25,50,75,98], ... % Change the axes tick marks
     'XTickLabelRotation', 90, ...
     'YTick', [1,25,50,75,98], ...
     'YTickLabel', [1,25,50,75,98]); 
-title('w > 0.1')
+title("w > " + binarize_thresh)
 
 subplot(1,4,4)
 imagesc(binarized_matrix, clims);
@@ -100,4 +103,4 @@ set(gca, 'XTick', [1,25,50,75,98], ... % Change the axes tick marks
     'XTickLabelRotation', 90, ...
     'YTick', [1,25,50,75,98], ...
     'YTickLabel', [1,25,50,75,98]); 
-title('w > 0.1 binarized')
+title("w > " + binarize_thresh + " binarized")
