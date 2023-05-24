@@ -136,6 +136,7 @@ for d = 1:length(days)
         infoFMRI.day = days(d);
         infoFMRI.names = namesOfMat;
         infoFMRI.matrix = current_matAll;
+        infoFMRI.raw_matrix = coMat;
         infoFMRI.labels = labels;
         infoFMRI.clustercoef = clustercoef;
         infoFMRI.participationcoef = participationcoef;
@@ -150,6 +151,8 @@ for d = 1:length(days)
         infoFMRI.assortativity = assortativity;
         infoFMRI.modularity = modularity;
         infoFMRI.charPathLength = charPathLength;
+        infoFMRI.thres = thres;
+        infoFMRI.thres_type = thres_type;
         
         % Normalizing smallWorldness using random networks:
         % clustercoeff(:,i) returns a matrix for the given subject i
