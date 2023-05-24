@@ -65,6 +65,7 @@ for d = 1:length(days)
             current_matAll = coMat;
             % Remove negative values in the matrices (just in case)
             current_matAll(current_matAll<=0) = 0;
+            infoDTI.raw_matrix = current_matAll;
             
             % Apply the threshold for the number of fibers
             switch(thres_type)
@@ -167,6 +168,8 @@ for d = 1:length(days)
         infoDTI.assortativity = assortativity;
         infoDTI.modularity = modularity;
         infoDTI.charPathLength = charPathLength;
+        infoDTI.thres = thres;
+        infoDTI.thres_type = thres_type;
         
         % Normalizing smallWorldness using random networks:
         % clustercoeff(:,i) returns a matrix for the given subject i
