@@ -113,7 +113,6 @@ for d = 1:length(days)
             betweenness(i,:) =  betweenness_wei(current_mat_inverse);           
             centrality_eigen(i,:) =   eigenvector_centrality_und(current_mat); 
             localEfficiency(i,:) = efficiency_wei(current_mat,2);
-            
           
             % Global parameters for each subject using graph theory (BCT)
             density(i) = density_und(current_mat);
@@ -132,11 +131,31 @@ for d = 1:length(days)
             end
                    
         end
+
+         % calculate z-transformation
+            [rows, cols, depth] = size(coMat);
+            z_trans_mat = zeros(rows,cols,depth);
+            for i=1:rows
+                for j=1:cols
+                    for h=1:depth
+                        current_mean = mean(coMat(i,j,:));
+                        current_std = std(coMat(i,j,:));
+                        current_val = coMat(i,j,h);
+                            
+                        if current_std ~= 0 
+                            z_trans_val = (current_val - current_mean)  / current_std;
+                            z_trans_mat(i,j,h) = z_trans_val;
+                        end
+                    end
+                end
+            end 
+
         infoFMRI.group = groups(g);
         infoFMRI.day = days(d);
         infoFMRI.names = namesOfMat;
         infoFMRI.matrix = current_matAll;
         infoFMRI.raw_matrix = coMat;
+        infoFMRI.z_trans_matrix = z_trans_mat;
         infoFMRI.labels = labels;
         infoFMRI.clustercoef = clustercoef;
         infoFMRI.participationcoef = participationcoef;
