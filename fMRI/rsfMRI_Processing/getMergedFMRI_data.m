@@ -11,7 +11,7 @@ days = fmriStruct.days;
 out_path = fmriStruct.out_path;
 % initialize counter for the number of regions
 numOfRegions_all(1) = 0; 
-j = 2;
+j=2;
 for d = 1:length(days)
     for g = 1:length(groups)
         disp('Processing '+days(d)+': '+groups(g)+' ...');       
@@ -25,7 +25,7 @@ for d = 1:length(days)
         if j-1 ~= 1 && numOfRegions_all(j) ~= numOfRegions_all(j-1)
             disp('Warning: Number of atlas labels differs between two subjects, groups or days!');
         end
-        % Create infoFMRI struct
+        % Create infoFMRI struct            
         numOfRegions = unique(numOfRegions_all(2:end));
         % numOfRegions_all should contain a 0 in position 1.
         % All subsequent positions should contain the number of atlas
@@ -131,7 +131,18 @@ for d = 1:length(days)
             end
                    
         end
-
+        
+        % calculate z-transformation
+        [rows, cols, depth] = size(coMat);
+        z_trans_mat = zeros(rows,cols,depth);
+        for ii=1:rows
+            for jj=1:cols
+                for hh=1:depth
+                    z = 0.5*log((1 + coMat(ii,jj,hh)) / (1-coMat(ii,jj,hh)));
+                    z_trans_mat(ii,jj,hh) = z;
+                end
+            end
+        end 
       
  
 
@@ -140,6 +151,7 @@ for d = 1:length(days)
         infoFMRI.names = namesOfMat;
         infoFMRI.matrix = current_matAll;
         infoFMRI.raw_matrix = coMat;
+        infoFMRI.z_trans_matrix = z_trans_mat;
         infoFMRI.labels = labels;
         infoFMRI.clustercoef = clustercoef;
         infoFMRI.participationcoef = participationcoef;
@@ -168,19 +180,6 @@ for d = 1:length(days)
         charPathLength_normalized(i) = charPathLength(i)/charPathLength_rand(i);        
         infoFMRI.smallWorldness = (clustercoef_normalized(:,i)/charPathLength_normalized(i))';
         infoFMRI.overallConnectivity = overallConnectivity;
-
-        % calculate z-transformation
-        [rows, cols, depth] = size(coMat);
-        z_trans_mat = zeros(rows,cols,depth);
-        for i=1:rows
-            for j=1:cols
-                for h=1:depth
-                    z = 0.5*log((1 + coMat(i,j,h)) / (1-coMat(i,j,h)));
-                    z_trans_mat(i,j,h) = z;
-                end
-            end
-        end 
-        infoFMRI.z_trans_matrix = z_trans_mat;
         
         %infoFMRI.smallWorldness = (nanmean(clustercoef(:,i),2)/charPathLength(i))';
    
