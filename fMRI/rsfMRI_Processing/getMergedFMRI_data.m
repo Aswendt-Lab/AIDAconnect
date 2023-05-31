@@ -132,30 +132,14 @@ for d = 1:length(days)
                    
         end
 
-         % calculate z-transformation
-            [rows, cols, depth] = size(coMat);
-            z_trans_mat = zeros(rows,cols,depth);
-            for i=1:rows
-                for j=1:cols
-                    for h=1:depth
-                        current_mean = mean(coMat(i,j,:));
-                        current_std = std(coMat(i,j,:));
-                        current_val = coMat(i,j,h);
-                            
-                        if current_std ~= 0 
-                            z_trans_val = (current_val - current_mean)  / current_std;
-                            z_trans_mat(i,j,h) = z_trans_val;
-                        end
-                    end
-                end
-            end 
+      
+ 
 
         infoFMRI.group = groups(g);
         infoFMRI.day = days(d);
         infoFMRI.names = namesOfMat;
         infoFMRI.matrix = current_matAll;
         infoFMRI.raw_matrix = coMat;
-        infoFMRI.z_trans_matrix = z_trans_mat;
         infoFMRI.labels = labels;
         infoFMRI.clustercoef = clustercoef;
         infoFMRI.participationcoef = participationcoef;
@@ -184,6 +168,19 @@ for d = 1:length(days)
         charPathLength_normalized(i) = charPathLength(i)/charPathLength_rand(i);        
         infoFMRI.smallWorldness = (clustercoef_normalized(:,i)/charPathLength_normalized(i))';
         infoFMRI.overallConnectivity = overallConnectivity;
+
+        % calculate z-transformation
+        [rows, cols, depth] = size(coMat);
+        z_trans_mat = zeros(rows,cols,depth);
+        for i=1:rows
+            for j=1:cols
+                for h=1:depth
+                    z = 0.5*log((1 + coMat(i,j,h)) / (1-coMat(i,j,h)));
+                    z_trans_mat(i,j,h) = z;
+                end
+            end
+        end 
+        infoFMRI.z_trans_matrix = z_trans_mat;
         
         %infoFMRI.smallWorldness = (nanmean(clustercoef(:,i),2)/charPathLength(i))';
    
