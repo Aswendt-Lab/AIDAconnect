@@ -5,10 +5,10 @@
 %% Specifications
 
 % Path to the processed image data folder (e.g. proc_data)
-inputFMRI.in_path = "C:\Users\aswen\Documents\Data\Project_CRC\proc_data_processed";
+inputFMRI.in_path = "Z:\CRC_WP1\inputs\mri\proc_data";
 
 % Observation days e.g. “P1" etc.
-inputFMRI.days = ["P7", "P21","P28"];
+inputFMRI.days = ["Baseline", "P1","P7","P14","P21","P28"];
 
 % Groups e.g. “Sham” etc.
 inputFMRI.groups = ["Sham","StrokeGood","StrokeBad"];
@@ -17,7 +17,7 @@ inputFMRI.groups = ["Sham","StrokeGood","StrokeBad"];
 thres_type = 1;
 
 % Output path
-inputFMRI.out_path = "C:\Users\aswen\Documents\Data\Project_CRC\proc_data_processed\Results\outputFMRI";
+inputFMRI.out_path = "Z:\CRC_WP1\outputs\AIDAconnet_results\outputFMRI_DensityBased_Allpercent_SliceTimeCorrected_data";
 
 % Threshold (0-1)
 % For the Density-based threshold, this is the proportion of
@@ -25,7 +25,7 @@ inputFMRI.out_path = "C:\Users\aswen\Documents\Data\Project_CRC\proc_data_proces
 thres_begin = 0;
 thres_end = 1;
 Step = 0.1;
-ParCompute = "Yes"; % Choose between "Yes" or "No" for parallel computation (faster) 
+ParCompute = "Yes"; % Choose between "Yes" or "No" for parallel computation (faster)
 %% Do not modify the following lines
 % This Script tests the existence of the output path and consolidates all
 % data only if the path does not exist. If the path already exists only
@@ -48,9 +48,6 @@ for ii = 1:numel(thres)
     infoFMRI = getMergedFMRI_data(inputFMRI,thres_type,thres(ii)); %% A saving process is implemented in the function. infofMRI can be used for developers.
 end
 end
-   
-
-
 
 
 

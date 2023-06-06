@@ -38,8 +38,8 @@ for dd = 1:length(inputPlot.days)
         end
         [~,I] = sort(X);
         plot(X(I),Y(I),"LineWidth",1,"Marker",".","LineStyle","-","MarkerSize",10)
-        set(gca,'YTick',linspace(1,30,30))
-        %ylim([0 30])
+        set(gca,'YTick',linspace(0,30,20))
+        ylim([0 30])
         title(inputPlot.days(dd))
         ylabel("Mean Node Strength")
         xlabel("Density Threshold")

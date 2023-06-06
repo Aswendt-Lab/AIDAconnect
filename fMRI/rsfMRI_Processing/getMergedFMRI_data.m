@@ -1,4 +1,4 @@
-function infoFMRI = getMergedFMRI_data(fmriStruct,thres_type,thres)
+   function infoFMRI = getMergedFMRI_data(fmriStruct,thres_type,thres)
 
 %% getMergedFMRI_data
 % This function is used by mergeFMRIdata_input.m and is not meant to be

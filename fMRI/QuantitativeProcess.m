@@ -1,28 +1,19 @@
+%% General Info
+% Author: A.Kalantari
+% arefks@gmail.com
+
 %% First Steps
 % Consolidates all graph-theoretical measures of the processed rsfMRI-data. 
 % Please specify all information below and hit 'Run'.
-
+clc
+clear
 %% Specifications
-
-% Path to the processed image data folder (e.g. proc_data)
-inputFMRI.in_path = "Z:\CRC_WP1\inputs\mri\proc_data";
-
 % Observation days e.g. “P1" etc.
 inputFMRI.days = ["Baseline","P1","P7","P14","P21","P28"];
-
 % Groups e.g. “Sham” etc.
-inputFMRI.groups = ["Sham","StrokeBad"];
-
-% Threshold Type (0: Fixed, 1: Density-based)
-thres_type = 1;
-
-% Threshold (0-1)
-% For the Density-based threshold, this is the proportion of
-% the biggest weights to preserve
-thres = 0.2;
- 
-% Output path 
-inputFMRI.out_path = "Z:\CRC_WP1\outputs\AIDAconnet_results\outputFMRI_DensityBased_0.2percent_SliceTimeCorrected_data";
+inputFMRI.groups = ["StrokeGood","StrokeBad","Sham"];
+% path where the results where saved 
+inputFMRI.out_path = "C:\Users\aswen\Documents\Data\CRC_WP1\outputs\AIDAconnet_results\outputFMRI_DensityBased_30percent_SliceTimeCorrected_data";
 
 %% Do not modify the following lines
 % This Script tests the existence of the output path and consolidates all
@@ -31,9 +22,46 @@ inputFMRI.out_path = "Z:\CRC_WP1\outputs\AIDAconnet_results\outputFMRI_DensityBa
 % will be created, which are necessary for several analysis functions.
 addpath('..\Tools\NIfTI\')
 addpath('.\rsfMRI_Processing\')
-if ~exist(inputFMRI.out_path,'dir')
-    mkdir(inputFMRI.out_path)  
-    getMergedFMRI_data(inputFMRI,thres_type,thres);
-end
 [graphCell,matrixValues,ids]=graphAnalysis_fMRI(inputFMRI);
 acronyms = load('..\Tools\infoData\acronyms_splitted.mat').acronyms;
+%% Applying modified functions
+
+
+Tables = ConnectionWeight(inputFMRI, graphCell, 'L PTLp', 'R MOp')
+M_final = []
+
+for tt=1:length(Tables)
+    T = Tables{tt};
+    M = table2array(T)';
+    S(tt) = size(M,2)
+end
+mm = ceil(max(S)/10)*10;
+for tt=1:length(Tables)
+    T = Tables{tt};
+    M = table2array(T)';
+    M_bigger = nan(size(M,1),mm)
+    M_bigger(:,1:length(M)) = M
+    M_final = [M_final,M_bigger]
+end
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
