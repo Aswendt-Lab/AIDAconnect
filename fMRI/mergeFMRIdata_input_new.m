@@ -14,10 +14,10 @@ inputFMRI.days = ["Baseline", "P1","P7","P14","P21","P28"];
 inputFMRI.groups = ["Sham","StrokeGood","StrokeBad"];
 
 % Threshold Type (0: Fixed, 1: Density-based)
-thres_type = 1;
+thres_type = 0;
 
 % Output path
-inputFMRI.out_path = "Z:\CRC_WP1\outputs\AIDAconnet_results\outputFMRI_DensityBased_Allpercent_SliceTimeCorrected_data";
+inputFMRI.out_path = "Z:\CRC_WP1\outputs\AIDAconnet_results\outputFMRI_FixedBased_Allpercent_SliceTimeCorrected_data";
 
 % Threshold (0-1)
 % For the Density-based threshold, this is the proportion of

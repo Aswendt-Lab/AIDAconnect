@@ -62,10 +62,9 @@ for tt=1:S(1)
     end
 end
 
-[p,tbl,stats,~] = anovan(Value,{GroupName,TimeName},"interaction");
+[p,tbl,stats,terms] = anovan(Value,{GroupName,TimeName});
 
-[c,~,~,gnames] = multcompare(stats,"Dimension",[1 2]);
-
+[c,m,h,gnames] = multcompare(stats,);
 
 
 

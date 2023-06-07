@@ -7,7 +7,7 @@ close all
 %% Specifications
 
 % Path to the processed image data folder i.e the outputfolder from the step before(e.g. proc_data)
-inputPlot.in_path ="Z:\CRC_WP1\outputs\AIDAconnet_results\outputFMRI_DensityBased_Allpercent_SliceTimeCorrected_data";
+inputPlot.in_path ="Z:\CRC_WP1\outputs\AIDAconnet_results\outputFMRI_FixedBased_Allpercent_SliceTimeCorrected_data";
 
 % Observation days e.g. “P1" etc.
 inputPlot.days = ["Baseline","P1","P7","P14","P21","P28"];
@@ -54,7 +54,7 @@ end
 if SavePlot == "On"
     figHandles = findall(0,'Type','figure');
     % Create filename
-    fn = fullfile(inputPlot.in_path,"Dynamic_thresold_ProofOfPrinciple");  
+    fn = fullfile(inputPlot.in_path,"Fixed_thresold_ProofOfPrinciple");  
 
     % Save first figure
     export_fig(fn, '-pdf', figHandles(1))

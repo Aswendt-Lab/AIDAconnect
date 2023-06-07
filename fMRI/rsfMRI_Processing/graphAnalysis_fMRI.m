@@ -35,8 +35,9 @@ for gIdx = 1:length(groups)
         
         % Load the files created by getMergedFMRI_data.m
         % and get the correlation matrices
-        PP = dir(fullfile(path,groups(gIdx), [char(days(dIdx)), '_*.mat']));
-        tempFile = load(fullfile(PP.folder, PP.name));
+        PP = dir(fullfile(path,groups(gIdx),[char(days(dIdx)), '*.mat']));
+        disp(fullfile(PP(end).folder, PP(end).name)) %%here some mistake might happen when using multiple thresholds
+        tempFile = load(fullfile(PP(end).folder, PP(end).name));
         tempMatrices = tempFile.infoFMRI.matrix;
         meanMatrixValues = mean(tempMatrices,3);
         ids{gIdx,dIdx} = tempFile.infoFMRI.names;
