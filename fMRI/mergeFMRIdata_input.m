@@ -11,7 +11,7 @@ inputFMRI.in_path = "/Volumes/path/to/proc_data";
 inputFMRI.days = ["Baseline","P7","P14","P28","P42","P56"];
 
 % Groups e.g. “Sham” etc.
-inputFMRI.groups = ["Group1", "Group2"];
+inputFMRI.groups = = ["Group1", "Group2"];
 
 % Threshold Type (0: Fixed, 1: Density-based)
 thres_type = 1;
@@ -19,10 +19,11 @@ thres_type = 1;
 % Threshold (0-1)
 % For the Density-based threshold, this is the proportion of
 % the biggest weights to preserve
-thres = 0.8;
+thres = 0.2;
  
 % Output path 
 inputFMRI.out_path = "/Volumes/path/to/desired/output";
+
 
 %% Do not modify the following lines
 % This Script tests the existence of the output path and consolidates all

@@ -1,6 +1,7 @@
 %% First Steps
 % Consolidates all graph-theoretical measures of the processed DTI-data. 
 % Please specify all information below and hit 'Run'.
+ 
 
 %% Specifications
 
@@ -8,7 +9,7 @@
 inputDTI.in_path = "/Volumes/path/to/proc_data";
 
 % Observation days (e.g. "P1" etc.)
-inputDTI.days = ["Baseline","P7","P14","P28","P42","P56"];
+inputDTI.days =  ["Baseline","P7","P14","P28","P42","P56"];
 
 % Groups (e.g. "Sham" etc.)
 inputDTI.groups = ["Group1", "Group2"];
@@ -19,7 +20,7 @@ thres_type = 1;
 % Threshold (0-1)
 % For the Density-based threshold, this is the proportion of
 % the biggest weights to preserve
-thres = 0.8;
+thres = 1;
 
 % Output path 
 inputDTI.out_path = "/Volumes/path/to/desired/output";
