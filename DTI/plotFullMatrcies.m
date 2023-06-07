@@ -5,7 +5,7 @@
 
 %% Specifications
 
-filename =  "C:\Users\marc\Documents\UniklinikArbeit\Projekt_AIDAconnect\AIDAconnect_output_dti\Treatment\P28.mat"; % path to a processed MAT-File
+filename =  "/Volumes/path/to/proc_data/Treatment/P28.mat"; % path to a processed MAT-File
 
 %% Do not modify the following lines
 
@@ -32,7 +32,7 @@ for jj = 1:numberOfSubjects
 end
 
 % calculate mean values of group
-mean_matrix = mean(infoDTI.matrix(:, :, listWithSubjectIndices), 3)<
+mean_matrix = mean(infoDTI.matrix(:, :, listWithSubjectIndices), 3);
 
 % Determine min and max values for visualization
 minval = 0;
