@@ -8,7 +8,7 @@
 inputFMRI.in_path = "Z:\CRC_WP1\inputs\mri\proc_data";
 
 % Observation days e.g. “P1" etc.
-inputFMRI.days = ["Baseline", "P1","P7","P14","P21","P28"];
+inputFMRI.days = ["P1","P7","P14","P21","P28"];
 
 % Groups e.g. “Sham” etc.
 inputFMRI.groups = ["Sham","StrokeGood","StrokeBad"];
@@ -17,13 +17,14 @@ inputFMRI.groups = ["Sham","StrokeGood","StrokeBad"];
 thres_type = 0;
 
 % Output path
-inputFMRI.out_path = "Z:\CRC_WP1\outputs\AIDAconnet_results\outputFMRI_FixedBased_Allpercent_SliceTimeCorrected_data";
+inputFMRI.out_path = "Z:\CRC_WP1\outputs\AIDAconnet_results\outputFMRI_FixedBased_Allpercent_SliceTimeCorrected_data2";
 
 % Threshold (0-1)
 % For the Density-based threshold, this is the proportion of
-% the biggest weights to preserve
-thres_begin = 0;
-thres_end = 1;
+% the biggest weights to preserve. For fixed based threshold everything
+% thats under the threshold will be set to zero.
+thres_begin = 0.5;
+thres_end = 0.9;
 Step = 0.1;
 ParCompute = "Yes"; % Choose between "Yes" or "No" for parallel computation (faster)
 %% Do not modify the following lines
@@ -38,15 +39,16 @@ end
 thres = thres_begin:Step:thres_end;
 
 if ParCompute == "Yes"
-parfor ii = 1:numel(thres)
-    infoFMRI = getMergedFMRI_data(inputFMRI,thres_type,thres(ii)); %% A saving process is implemented in the function. infofMRI can be used for developers.
-end
+     parpool(6)
+    parfor ii = 1:numel(thres)
+        infoFMRI = getMergedFMRI_data(inputFMRI,thres_type,thres(ii)); %% A saving process is implemented in the function. infofMRI can be used for developers.
+    end
 end
 
 if ParCompute == "No"
-for ii = 1:numel(thres)
-    infoFMRI = getMergedFMRI_data(inputFMRI,thres_type,thres(ii)); %% A saving process is implemented in the function. infofMRI can be used for developers.
-end
+    for ii = 1:numel(thres)
+        infoFMRI = getMergedFMRI_data(inputFMRI,thres_type,thres(ii)); %% A saving process is implemented in the function. infofMRI can be used for developers.
+    end
 end
 
 

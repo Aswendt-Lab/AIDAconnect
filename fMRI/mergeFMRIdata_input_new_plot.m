@@ -7,7 +7,7 @@ close all
 %% Specifications
 
 % Path to the processed image data folder i.e the outputfolder from the step before(e.g. proc_data)
-inputPlot.in_path ="Z:\CRC_WP1\outputs\AIDAconnet_results\outputFMRI_FixedBased_Allpercent_SliceTimeCorrected_data";
+inputPlot.in_path ="Z:\CRC_WP1\outputs\AIDAconnet_results\outputFMRI_FixedBased_Allpercent_SliceTimeCorrected_data2";
 
 % Observation days e.g. “P1" etc.
 inputPlot.days = ["Baseline","P1","P7","P14","P21","P28"];
@@ -31,18 +31,23 @@ for dd = 1:length(inputPlot.days)
             Path = fullfile(files(ff).folder,files(ff).name);
             load(Path);
             Data = infoFMRI;
-            S =Data.strengths;
+            S = Data.density;
             M = mean(S,"all");
-            Y(ff) = M;
-            X(ff) = Data.density(1,1);
+            X(ff) = M;
+            temp = strsplit(files(ff).name,".mat");
+            temp = strsplit(temp{1},"_");
+            Y(ff) = str2num(temp{end});
         end
+        
         [~,I] = sort(X);
+        %plot(X(I),Y(I),"LineWidth",1,"Marker",".","LineStyle","-","MarkerSize",10)
         plot(X(I),Y(I),"LineWidth",1,"Marker",".","LineStyle","-","MarkerSize",10)
-        set(gca,'YTick',linspace(1,30,30))
+        
+        %set(gca,'YTick',linspace(1,30,30))
         %ylim([0 30])
         title(inputPlot.days(dd))
-        ylabel("Mean Node Strength")
-        xlabel("Density Threshold")
+        ylabel("Threshold")
+        xlabel("Mean Density")
         hold on
         
     end
@@ -54,7 +59,7 @@ end
 if SavePlot == "On"
     figHandles = findall(0,'Type','figure');
     % Create filename
-    fn = fullfile(inputPlot.in_path,"Fixed_thresold_ProofOfPrinciple");  
+    fn = fullfile(inputPlot.in_path,"Fixed_thresold_ProofOfPrinciple_MeanDensity_bookPlot");  
 
     % Save first figure
     export_fig(fn, '-pdf', figHandles(1))
