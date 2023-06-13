@@ -13,26 +13,11 @@ P = load(filename);
 infoDTI = P.infoDTI;
 
 load('../Tools/infoData/acronyms_splitted.mat');
-numberOfSubjects = size(infoDTI.names,1);
 
-% Determine number of subplots
-plotSize = sqrt(numberOfSubjects);
-plotSize_compare = floor(plotSize)+0.5;
-if plotSize < plotSize_compare
-    plot_x = floor(plotSize);
-    plot_y = ceil(plotSize);
-else
-    plot_x = ceil(plotSize);
-    plot_y = plot_x;
-end
-
-listWithSubjectIndices = zeros(1,numberOfSubjects);
-for jj = 1:numberOfSubjects
-    listWithSubjectIndices(jj) = jj; % (e.g. = [1,2,3,4,5])
-end
 
 % calculate mean values of group
-mean_matrix = mean(infoDTI.matrix(:, :, listWithSubjectIndices), 3);
+mean_matrix = nanmean(infoDTI.raw_matrix, 3);
+std_matrix = nanstd(infoDTI.raw_matrix,0,3);
 
 % Determine min and max values for visualization
 minval = 0;
@@ -46,15 +31,17 @@ thres_type = infoDTI.thres_type;
 % determine threshold type
 if thres_type == 0
     thres_type_str = "fixed threshold";
+    thresh_matrix = threshold_absolute(mean_matrix, thres);
 elseif thres_type == 1
-    thres_type_str = "proportional threshold";
+    thres_type_str = "density threshold";
+    thresh_matrix = threshold_proportional(mean_matrix, thres);
 else
     thres_type_str = "invalid threshold";
 end
 
 figure('Name', 'Visualization of full matrix')
 subplot(1,4,1)
-imagesc(mean_matrix(:,:), clims);
+imagesc(mean_matrix, clims);
 c = colorbar;
 c.Label.String = "Correlation";
 caxis(clims)
@@ -67,7 +54,7 @@ set(gca, 'XTick', [1,25,50,75,98], ... % Change the axes tick marks
 title('Mean')
 
 subplot(1,4,2)
-imagesc(std(infoDTI.matrix(:, :, listWithSubjectIndices), 0, 3), clims./2);
+imagesc(std_matrix, clims./2);
 c = colorbar;
 c.Label.String = "Correlation";
 caxis(clims)
@@ -80,23 +67,13 @@ set(gca, 'XTick', [1,25,50,75,98], ... % Change the axes tick marks
 title('Std')
 
 % binarize matrix
-binarized_matrix = mean_matrix;
-[rows, cols, depth] = size(mean_matrix);
-for ii=1:depth
-    for jj=1:rows
-        for hh=1:cols
-            if mean_matrix(jj,hh,ii) < thres
-                mean_matrix(jj,hh,ii) = minval;
-                binarized_matrix(jj,hh,ii) = minval;
-            else 
-                binarized_matrix(jj,hh,ii) = maxval;
-            end
-        end
-    end
-end
+binarized_matrix = thresh_matrix;
+binarized_matrix(binarized_matrix>0) = maxval;
+
+
 
 subplot(1,4,3)
-imagesc(mean_matrix, clims);
+imagesc(thresh_matrix, clims);
 c = colorbar;
 c.Label.String = "Correlation";
 caxis(clims)
