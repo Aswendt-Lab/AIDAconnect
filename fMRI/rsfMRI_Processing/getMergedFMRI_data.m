@@ -25,6 +25,8 @@ for d = 1:length(days)
         if j-1 ~= 1 && numOfRegions_all(j) ~= numOfRegions_all(j-1)
             disp('Warning: Number of atlas labels differs between two subjects, groups or days!');
         end
+        matFile_pcorrR_cur = dir([cur_path '/*/fMRI/regr/Matrix_PcorrR*txt.mat']);
+        matFile_pcorrZ_cur = dir([cur_path '/*/fMRI/regr/Matrix_PcorrZ*txt.mat']);
         % Create infoFMRI struct            
         numOfRegions = unique(numOfRegions_all(2:end));
         % numOfRegions_all should contain a 0 in position 1.
@@ -35,6 +37,8 @@ for d = 1:length(days)
         % a concrete number in line 29 for numOfRegions, e.g. 98.
         infoFMRI = struct();
         coMat = zeros(numOfRegions,numOfRegions,length(matFile_cur));
+        pcorrR_mat = zeros(numOfRegions,numOfRegions,length(matFile_cur));
+        pcorrZ_mat = zeros(numOfRegions,numOfRegions,length(matFile_cur));
         namesOfMat = cell(length(matFile_cur),1);
         clustercoef =               zeros(length(matFile_cur),numOfRegions); 
         clustercoef_rand =          zeros(length(matFile_cur),numOfRegions);
@@ -68,6 +72,12 @@ for d = 1:length(days)
             
             [coMat(:,:,i),labels] = matrixMaker_rsfMRI((fullfile(matFile_cur(i).folder,matFile_cur(i).name)));
             current_matAll = abs(coMat); % Absolute values of the matrices
+
+            pcorrR_data = load(fullfile(matFile_pcorrR_cur(i).folder,matFile_pcorrR_cur(i).name));
+            pcorrR_mat(:,:,i) = double(pcorrR_data.matrix);
+
+            pcorrZ_data = load(fullfile(matFile_pcorrZ_cur(i).folder,matFile_pcorrZ_cur(i).name));
+            pcorrZ_mat(:,:,i) = double(pcorrZ_data.matrix);
             
             % Threshold for correlations
             switch(thres_type)
@@ -131,18 +141,6 @@ for d = 1:length(days)
             end
                    
         end
-        
-        % calculate z-transformation
-        [rows, cols, depth] = size(coMat);
-        z_trans_mat = zeros(rows,cols,depth);
-        for ii=1:rows
-            for jj=1:cols
-                for hh=1:depth
-                    z = 0.5*log((1 + coMat(ii,jj,hh)) / (1-coMat(ii,jj,hh)));
-                    z_trans_mat(ii,jj,hh) = z;
-                end
-            end
-        end 
       
  
 
@@ -151,7 +149,8 @@ for d = 1:length(days)
         infoFMRI.names = namesOfMat;
         infoFMRI.matrix = current_matAll;
         infoFMRI.raw_matrix = coMat;
-        infoFMRI.z_trans_matrix = z_trans_mat;
+        infoFMRI.pcorrR_matrix = pcorrR_mat;
+        infoFMRI.pcorrZ_matrix = pcorrZ_mat;
         infoFMRI.labels = labels;
         infoFMRI.clustercoef = clustercoef;
         infoFMRI.participationcoef = participationcoef;
