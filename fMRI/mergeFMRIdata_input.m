@@ -33,9 +33,12 @@ inputFMRI.out_path = "/Volumes/path/to/desired/output";
 
 addpath('../Tools/NIfTI/')
 addpath('./rsfMRI_Processing/')
-if ~exist(inputFMRI.out_path,'dir')
+if ~exist(inputFMRI.out_path,'dir') || numel(dir(inputFMRI.out_path)) <= 2
     mkdir(inputFMRI.out_path)  
     getMergedFMRI_data(inputFMRI,thres_type,thres);
+else
+    f = msgbox("If you wish to process your data again, please delete the output folder manually.", "Attention");
 end
 [graphCell,matrixValues,ids]=graphAnalysis_fMRI(inputFMRI);
 acronyms = load('../Tools/infoData/acronyms_splitted.mat').acronyms;
+

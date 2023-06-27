@@ -22,8 +22,10 @@ inputT2.out_path = "/Users/Username/Documents/Projects/proc_data/outputT2w";
 
 addpath('../Tools/NIfTI/')
 addpath('./T2w_Processing/')
-if ~exist(inputT2.out_path,'dir')
+if ~exist(inputT2.out_path,'dir') || numel(dir(inputFMRI.out_path)) <= 2
     mkdir(inputT2.out_path)  
     getMergedT2_data(inputT2);
+else
+    f = msgbox("If you wish to process your data again, please delete the output folder manually.", "Attention");
 end
 acronyms = load('../Tools/infoData/acronyms.mat').acronyms;
