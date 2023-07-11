@@ -43,14 +43,54 @@ for ii = 1:size(OutStruct.Data, 1)
         [p(ii, jj), ~, ~] = anova1(squeeze(OutStruct.Data(ii, jj, :, dayI, :)), 1:1:2, 'off');
     end
 end
+
+% extract upper half of pvalue matrix
+ptri = triu(p,1);
+pvec = ptri(:);
+pvec = pvec(pvec~=0);
+
+% generate masks to save data in 98x98 matrix later on
+uppermask = ones(98);
+uppermask = triu(uppermask,1);
+lowermask = ones(98);
+lowermask = tril(lowermask,-1);
+
+resultMat = zeros(98);
+
+% perform fdr correction
+[~,crit_p,~,adjPvals] = fdr_bh(pvec, 0.05, 'dep', 'yes');
+
+% save results
+resultMat(uppermask==1) = adjPvals;
+resultMat(lowermask==1) = adjPvals;
+
+
 figure()
-imagesc(p < 0.05)
-title(['Significant Group Differences Day ', char(inputFMRI.days(dayI))])
+imagesc(resultMat <= crit_p)
+c = colorbar;
+c.Label.String = "Significance";
+clim([0 1])
+axis square;
+title(['Significant Group Differences Day fdr corrected ', char(inputFMRI.days(dayI))])
 ylabel('Regions of Group 1: '+strrep(inputFMRI.groups(1),'_',' '));
 xlabel('Regions of Group 2: '+strrep(inputFMRI.groups(2),'_',' '));
 set(gca,'xtick',1:numOfRegions,'xticklabel',acronyms,'fontsize',8)
 set(gca,'ytick',1:numOfRegions,'yticklabel',acronyms,'fontsize',8)
 xtickangle(45);
+
+figure()
+imagesc(p < 0.05)
+c = colorbar;
+c.Label.String = "Significance";
+clim([0 1])
+axis square;
+title(['Significant Group Differences Day', char(inputFMRI.days(dayI))])
+ylabel('Regions of Group 1: '+strrep(inputFMRI.groups(1),'_',' '));
+xlabel('Regions of Group 2: '+strrep(inputFMRI.groups(2),'_',' '));
+set(gca,'xtick',1:numOfRegions,'xticklabel',acronyms,'fontsize',8)
+set(gca,'ytick',1:numOfRegions,'yticklabel',acronyms,'fontsize',8)
+xtickangle(45);
+
 
 if inputFMRI.save == 1
     fig = gcf;
