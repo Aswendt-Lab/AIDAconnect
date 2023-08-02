@@ -5,7 +5,7 @@
 
 %% Specifications
 
-filename =  "/Volumes/path/to/proc_data/Treatment/P28.mat"; % path to a processed MAT-File
+filename = "/Volumes/path/to/proc_data/Treatment/P28.mat"; % path to a processed MAT-File
 
 %% Do not modify the following lines
 
