@@ -43,7 +43,7 @@ figure('Name', 'Visualization of full matrix')
 subplot(1,4,1)
 imagesc(mean_matrix, clims);
 c = colorbar;
-c.Label.String = "Correlation";
+c.Label.String = "Fiber count";
 caxis(clims)
 axis square;
 set(gca, 'XTick', [1,25,50,75,98], ... % Change the axes tick marks
@@ -56,7 +56,7 @@ title('Mean')
 subplot(1,4,2)
 imagesc(std_matrix, clims./2);
 c = colorbar;
-c.Label.String = "Correlation";
+c.Label.String = "Fiber count";
 caxis(clims)
 axis square;
 set(gca, 'XTick', [1,25,50,75,98], ... % Change the axes tick marks
@@ -75,7 +75,7 @@ binarized_matrix(binarized_matrix>0) = maxval;
 subplot(1,4,3)
 imagesc(thresh_matrix, clims);
 c = colorbar;
-c.Label.String = "Correlation";
+c.Label.String = "Fiber count";
 caxis(clims)
 axis square;
 set(gca, 'XTick', [1,25,50,75,98], ... % Change the axes tick marks
@@ -89,7 +89,7 @@ if thres > 0
     subplot(1,4,4)
     imagesc(binarized_matrix, clims);
     c = colorbar;
-    c.Label.String = "Correlation";
+    c.Label.String = "Fiber count";
     caxis(clims)
     axis square;
     set(gca, 'XTick', [1,25,50,75,98], ... % Change the axes tick marks
