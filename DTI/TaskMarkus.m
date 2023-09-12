@@ -11,7 +11,7 @@ filename = "Z:\CRC_WP1\outputs\AIDAconnet_results\OutputDTI_thres0"; % path to a
 files = dir(fullfile(filename,"**","*.mat"));
 
 ROI_L = ["L MOp", "L MOs", "L SSp-un","L SSp-ul","L SSp-n","L SSp-m","L SSp-ll","L SSp-bfd"];
-ROI_R =  ["R MOp", "R MOs", "R SSp-un","R SSp-ul","R SSp-n","R SSp-m","R SSp-ll","R SSp-bfd"];
+ROI_R =  ["L DORsm", "L DORsm", "L DORsm","L DORsm","L DORsm","L DORsm","L DORsm","L DORsm"];
 days = ["Baseline","P1","P7","P14","P21","P28"];
 group = ["StrokeGood", "StrokeBad", "Sham"];
 %% Do not modify the following lines

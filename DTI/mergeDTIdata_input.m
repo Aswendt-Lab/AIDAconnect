@@ -5,14 +5,14 @@
 %% Specifications
 
 % Path to the processed image data folder (e.g. proc_data)
-inputDTI.in_path = "Y:\Desktop\Data\CRC_WP1\inputs\mri\proc_data";
+inputDTI.in_path = "Z:\CRC_WP1\outputs\AIDAconnet_results\OutputDTI_thres0";
 
 % Observation days (e.g. "P1" etc.)
 inputDTI.days = ["Baseline","P1","P7","P14","P21","P28"]; 
 %inputDTI.days = ["Baseline","P1","P7","P14","P21","P28"]; 
 
 % Groups (e.g. "Sham" etc.)
-inputDTI.groups = ["StrokeBad","Sham"];
+inputDTI.groups = ["StrokeGood","Sham"];
 
 % Threshold Type (0: Fixed, 1: Density-based)
 thres_type = 0;
@@ -23,7 +23,7 @@ thres_type = 0;
 thres = 0;
 
 % Output path 
-inputDTI.out_path =  "Y:\Desktop\Data\CRC_WP1\inputs\mri\proc_data\Results\AIDAconnect\OutputDTI_thres0";
+inputDTI.out_path =  "Z:\CRC_WP1\outputs\AIDAconnet_results\OutputDTI_thres0";
 %% Do not modify the following lines
 % This script tests the existence of the output path and consolidates all
 % data only if the path does not exist. If the path already exists only
