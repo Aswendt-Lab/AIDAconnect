@@ -66,8 +66,7 @@ for d = 1:length(days)
         
         for i = 1:length(matFile_cur) % i = Subjects
             tempName = strsplit(matFile_cur(i).folder,filesep);
-            tempName = strsplit(string(tempName(end-2)),'_');
-            tempName = strjoin(tempName(1:4),'_');
+            tempName = tempName{end-2};
             namesOfMat{i} = tempName;
             
             [coMat(:,:,i),labels] = matrixMaker_rsfMRI((fullfile(matFile_cur(i).folder,matFile_cur(i).name)));
