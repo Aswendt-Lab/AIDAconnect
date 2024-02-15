@@ -41,15 +41,15 @@ for g = 1:length(groups)
             continue
         end
 
+        infoT2 =struct();
+        namesOfMat = cell(length(all_mat_files),1);
+        lesionSize_mm =     zeros(length(all_mat_files),1); 
+        lesionSize_percent =   zeros(length(all_mat_files),1); 
+        affectedRegions_percent =   zeros(length(all_mat_files),numOfRegions);
+
         for i = 1:length(all_mat_files)
             matFile_cur = all_mat_files{i};
-
-            infoT2 =struct();
-            namesOfMat = cell(length(all_mat_files),1);
-            lesionSize_mm =     zeros(length(all_mat_files),1); 
-            lesionSize_percent =   zeros(length(all_mat_files),1); 
-            affectedRegions_percent =   zeros(length(all_mat_files),numOfRegions);
-
+            
             tempName = split(all_mat_files{i}.folder,filesep);
             tempName = tempName(end-2:end-1);
             tempName = strjoin(tempName,"_");
@@ -63,7 +63,7 @@ for g = 1:length(groups)
             lesionSize_percent(i) = curMatFile.volumePer;
             
         end
-        if length(matFile_cur)>1
+        if length(all_mat_files)>=1
             infoT2.group = groups(g);
             infoT2.day = days(d);
             infoT2.names = namesOfMat;
@@ -76,11 +76,12 @@ for g = 1:length(groups)
             if ~exist(targetPath,'dir')
                 mkdir(targetPath);
             end   
-            disp(strcat(targetPath,filesep,days(d),'.mat'))
+            disp(strcat(targetPath,filesep,days(d),groups(g),'.mat'))
             disp(infoT2.names)
-            save(strcat(targetPath,filesep,days(d),'.mat'),'infoT2')
+            save(strcat(targetPath,filesep,days(d),groups(g),'.mat'),'infoT2')
         end
     end
+    
 end
 
 
