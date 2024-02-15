@@ -36,6 +36,10 @@ for g = 1:length(groups)
             end
             
             matFile_cur = dir([cur_path '/func/regr/MasksTCsSplit*.mat']);
+            if isempty(matFile_cur)
+                continue
+            end
+
             all_mat_files{groupsubject} = matFile_cur;
             % Random Sample Check
             randomSubject = randsample(1:size(matFile_cur,1),1);
