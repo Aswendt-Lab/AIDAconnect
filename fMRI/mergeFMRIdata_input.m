@@ -31,6 +31,14 @@ inputFMRI.out_path = "/Volumes/path/to/desired/output";
 % the struct inputFMRI and the cell matrices graphCell, matrixValues and ids
 % will be created, which are necessary for several analysis functions.
 
+% Get information about the contents of the directory
+contents = dir(inputFMRI.in_path);
+
+% Filter out subdirectories with names containing 'sub'
+subdirs = contents([contents.isdir] & ~cellfun('isempty', regexp({contents.name}, '^sub-', 'once')));
+
+inputFMRI.subdirs = subdirs;
+
 addpath('../Tools/NIfTI/')
 addpath('./rsfMRI_Processing/')
 if ~exist(inputFMRI.out_path,'dir') || numel(dir(inputFMRI.out_path)) <= 2
