@@ -101,7 +101,7 @@ for g = 1:length(groups)
                 matFIle_pcorrZ_cur = all_Zmat_files{i};
                 
                 tempName = strsplit(matFile_cur.folder,filesep);
-                tempName = tempName{end-2};
+                tempName = tempName{end-3};
                 namesOfMat{i} = tempName;
                 
                 [coMat(:,:,i),labels] = matrixMaker_rsfMRI((fullfile(matFile_cur.folder,matFile_cur.name)));
@@ -214,14 +214,13 @@ for g = 1:length(groups)
             
             %infoFMRI.smallWorldness = (nanmean(clustercoef(:,i),2)/charPathLength(i))';
        
-            targetPath = out_path;
+            targetPath = fullfile(out_path,groups(g));
             if ~exist(targetPath,'dir')
                 mkdir(targetPath);
             end
-            disp(strcat(targetPath,filesep,days(d),'.mat'))
+            disp(strcat(targetPath,filesep,days(d),"_",groups(g),'.mat'))
             disp(infoFMRI.names)
-            save(strcat(targetPath,filesep,days(d),'_' ,cur_group,'.mat'),'infoFMRI')
-            j = j+1;
+            save(strcat(targetPath,filesep,days(d),"_",groups(g),'.mat'),'infoFMRI')
     end
 
 end
