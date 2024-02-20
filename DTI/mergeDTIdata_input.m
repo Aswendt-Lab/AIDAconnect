@@ -33,7 +33,7 @@ inputDTI.out_path = "/Volumes/path/to/desired/output";
 
 addpath('../Tools/NIfTI/')
 addpath('./GraphEval/')
-if ~exist(inputDTI.out_path,'dir') || numel(dir(inputFMRI.out_path)) <= 2
+if ~exist(inputDTI.out_path,'dir') || numel(dir(inputDTI.out_path)) <= 2
     mkdir(inputDTI.out_path)
     getMergedDTI_data(inputDTI,thres_type,thres);
 else

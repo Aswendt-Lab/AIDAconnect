@@ -9,14 +9,14 @@ groupInfo.name = [];
 d=dir(strcat(fullfile(indir,prefix),'*connectivity.mat'));
 Nsubjects=size(d,1);
 
-if contains(prefix,'rsfMRISplit')
+if contains(prefix,'AnnoSplit_parental')
     dataTemplate=load('../Tools/infoData/annoVolume+2000_rsfMRI.mat');
     refLabels = dataTemplate.annoVolume2000rsfMRI;
-    annotations2getSize=dir(fullfile(fileparts(indir),'*AnnoSplit_rsfMRI.nii.gz'));
-elseif contains(prefix,'rsfMRI')
+    annotations2getSize=dir(fullfile(fileparts(indir),'*AnnoSplit_parental.nii.gz'));
+elseif contains(prefix,'parental')
     dataTemplate=load('../Tools/infoData/annoVolume.mat');
     refLabels = dataTemplate.annoVolume;
-    annotations2getSize=dir(fullfile(fileparts(indir),'*Anno_rsfMRI.nii.gz'));     
+    annotations2getSize=dir(fullfile(fileparts(indir),'*Anno_parental.nii.gz'));     
 else
     dataTemplate=load('../Tools/infoData/labelsNames.mat');
     refLabels = dataTemplate.ARAannotationR2000;

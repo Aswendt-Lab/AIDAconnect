@@ -7,61 +7,92 @@ function getMergedDTI_data(dtiStruct,thres_type,thres)
 addpath('../Tools/BCT');
 path  = dtiStruct.in_path;
 groups = dtiStruct.groups;
+groupmapping = readtable(fullfile(path, "GroupMapping.xlsx"));
 days = dtiStruct.days;
 out_path = dtiStruct.out_path;
 tempF = load('../Tools/infoData/acro_numbers_splitted.mat');
 acroNum = tempF.annotationsNumber;
 numOfRegions = size(acroNum,1);
 
-for d = 1:length(days)
-    for g = 1:length(groups)
-        disp('Processing '+days(d)+': '+groups(g)+' ...');     
-        cur_path = char(fullfile(path,days(d),groups(g)));
-        matFile_cur = dir([cur_path '/*/DTI/connectivity/*rsfMRISplit*pass.connectivity.mat']);       
-        infoDTI = struct();
-        coMat=zeros(numOfRegions,numOfRegions,length(matFile_cur));
-        namesOfMat = cell(length(matFile_cur),1);
-        clustercoef =               zeros(length(matFile_cur),numOfRegions);  
-        clustercoef_rand =          zeros(length(matFile_cur),numOfRegions);
-        clustercoef_normalized =    zeros(length(matFile_cur),numOfRegions);
-        participationcoef =         zeros(length(matFile_cur),numOfRegions);
-        degrees =                   zeros(length(matFile_cur),numOfRegions); 
-        strengths =                 zeros(length(matFile_cur),numOfRegions); 
-        betweenness =               zeros(length(matFile_cur),numOfRegions); 
-        centrality =                zeros(length(matFile_cur),numOfRegions);
-        localEfficiency =           zeros(length(matFile_cur),numOfRegions);
-        density =                   nan(1,length(matFile_cur));
-        transitivity =              nan(1,length(matFile_cur));
-        efficiency =                nan(1,length(matFile_cur));
-        efficiency_rand =           nan(1,length(matFile_cur));
-        assortativity =             nan(1,length(matFile_cur));
-        modularity =                nan(1,length(matFile_cur));
-        charPathLength =            nan(1,length(matFile_cur));
-        charPathLength_rand =       nan(1,length(matFile_cur));
-        charPathLength_normalized = nan(1,length(matFile_cur));
-        overallConnectivity =       zeros(1,length(matFile_cur));
+for g = 1:length(groups)
+    cur_group = groups(g);
+    for d = 1:length(days)
+        all_mat_files = cell(1, 0);
+        groupsubject = 1;
+        for s = 1:height(groupmapping)
+            subname = groupmapping(s,:).Subject{1};
+            group = groupmapping(s,:).Group{1};
+            if group ~= cur_group
+                continue
+            end
+            disp('Processing '+days(d)+': '+ subname+' ...');       
+            cur_path = char(fullfile(path,subname,"ses-"+days(d)));
+            if ~isfolder(cur_path)
+                disp(cur_path + " does not exist");
+                continue
+            end
+            
+            matFile_cur = dir([cur_path '/dwi/connectivity/*AnnoSplit_parental*pass.connectivity.mat']);
+            if isempty(matFile_cur)
+                continue
+            end
 
-        if length(matFile_cur)<1
+            all_mat_files{groupsubject} = matFile_cur;
+
+            groupsubject = groupsubject + 1;
+
+        end
+
+        if length(all_mat_files)<1
             error('There is no content in the given path!');
         end
-              
-        adfile_cur = dir([cur_path '/*/DTI/DSI_studio/*ad.nii.gz']);
-        fa0file_cur = dir([cur_path '/*/DTI/DSI_studio/*fa0.nii.gz']);
-        mdfile_cur = dir([cur_path '/*/DTI/DSI_studio/*md.nii.gz']);
-        rdfile_cur = dir([cur_path '/*/DTI/DSI_studio/*rd.nii.gz']);
-        arafile_cur = dir([cur_path '/*/DTI/DSI_studio/*rsfMRISplit_scaled.nii.gz']);
-        ad = nan(length(matFile_cur),numOfRegions);
-        fa0 = nan(length(matFile_cur),numOfRegions);
-        md = nan(length(matFile_cur),numOfRegions);
-        rd = nan(length(matFile_cur),numOfRegions);
+    
+        infoDTI = struct();
+        coMat=zeros(numOfRegions,numOfRegions,length(all_mat_files));
+        namesOfMat = cell(length(all_mat_files),1);
+        clustercoef =               zeros(length(all_mat_files),numOfRegions);  
+        clustercoef_rand =          zeros(length(all_mat_files),numOfRegions);
+        clustercoef_normalized =    zeros(length(all_mat_files),numOfRegions);
+        participationcoef =         zeros(length(all_mat_files),numOfRegions);
+        degrees =                   zeros(length(all_mat_files),numOfRegions); 
+        strengths =                 zeros(length(all_mat_files),numOfRegions); 
+        betweenness =               zeros(length(all_mat_files),numOfRegions); 
+        centrality =                zeros(length(all_mat_files),numOfRegions);
+        localEfficiency =           zeros(length(all_mat_files),numOfRegions);
+        density =                   nan(1,length(all_mat_files));
+        transitivity =              nan(1,length(all_mat_files));
+        efficiency =                nan(1,length(all_mat_files));
+        efficiency_rand =           nan(1,length(all_mat_files));
+        assortativity =             nan(1,length(all_mat_files));
+        modularity =                nan(1,length(all_mat_files));
+        charPathLength =            nan(1,length(all_mat_files));
+        charPathLength_rand =       nan(1,length(all_mat_files));
+        charPathLength_normalized = nan(1,length(all_mat_files));
+        overallConnectivity =       zeros(1,length(all_mat_files));
+             
+        ad = nan(length(all_mat_files),numOfRegions);
+        fa0 = nan(length(all_mat_files),numOfRegions);
+        md = nan(length(all_mat_files),numOfRegions);
+        rd = nan(length(all_mat_files),numOfRegions);
         
-        for i = 1:length(matFile_cur) % i = Subjects
-            tempName = matFile_cur(i).name;
+        for i = 1:length(all_mat_files) % i = Subjects
+            matFile_cur = all_mat_files{i};
+            cur_path = matFile_cur.folder;
+            [cur_path, ~, ~] = fileparts(cur_path);
+            cur_path = fileparts(cur_path);
+            
+            adfile_cur = dir([cur_path '/dwi/DSI_studio/*ad.nii.gz']);
+            fa0file_cur = dir([cur_path '/dwi/DSI_studio/*fa.nii.gz']);
+            mdfile_cur = dir([cur_path '/dwi/DSI_studio/*md.nii.gz']);
+            rdfile_cur = dir([cur_path '/dwi/DSI_studio/*rd.nii.gz']);
+            arafile_cur = dir([cur_path '/dwi/DSI_studio/*AnnoSplit_parental_scaled.nii']);
+
+            tempName = matFile_cur.name;
             tempName = strsplit(tempName,'_');
-            tempName = strjoin(tempName(1:4),'_');
+            tempName = strjoin(tempName(1),'_');
             namesOfMat{i} = tempName;
             
-            [coMat(:,:,i),labels] = matrixMaker_DTI((fullfile(matFile_cur(i).folder,matFile_cur(i).name)),0);
+            [coMat(:,:,i),labels] = matrixMaker_DTI((fullfile(matFile_cur.folder,matFile_cur.name)),0);
             current_matAll = coMat;
             % Remove negative values in the matrices (just in case)
             current_matAll(current_matAll<=0) = 0;
@@ -132,11 +163,11 @@ for d = 1:length(days)
             end
            
             % Get AD, FA0, RD and MD values and add them to the given struct
-            adNii = load_nii(fullfile(adfile_cur(i).folder,adfile_cur(i).name));
-            fa0Nii = load_nii(fullfile(fa0file_cur(i).folder,fa0file_cur(i).name));
-            mdNii = load_nii(fullfile(mdfile_cur(i).folder,mdfile_cur(i).name));
-            rdNii = load_nii(fullfile(rdfile_cur(i).folder,rdfile_cur(i).name));
-            araNii = load_nii(fullfile(arafile_cur(i).folder,arafile_cur(i).name));
+            adNii = load_nii(fullfile(adfile_cur.folder,adfile_cur.name));
+            fa0Nii = load_nii(fullfile(fa0file_cur.folder,fa0file_cur.name));
+            mdNii = load_nii(fullfile(mdfile_cur.folder,mdfile_cur.name));
+            rdNii = load_nii(fullfile(rdfile_cur.folder,rdfile_cur.name));
+            araNii = load_nii(fullfile(arafile_cur.folder,arafile_cur.name));
             adimg = adNii.img;
             fa0img = fa0Nii.img;
             mdimg = mdNii.img;
@@ -190,16 +221,16 @@ for d = 1:length(days)
         
         infoDTI.AD  = ad;
         infoDTI.FA0 = fa0;
-        infoDTI.MD  = md;
+        infoDTI.MD  = md; 
         infoDTI.RD  = rd;
    
         targetPath = fullfile(out_path,groups(g));
         if ~exist(targetPath,'dir')
             mkdir(targetPath);
         end   
-        disp(strcat(targetPath,filesep,days(d),'.mat'))
+        disp(strcat(targetPath,filesep,days(d),"_",groups(g),'.mat'))
         disp(infoDTI.names)
-        save(strcat(targetPath,filesep,days(d),'.mat'),'infoDTI')
+        save(strcat(targetPath,filesep,days(d),"_",groups(g),'.mat'),'infoDTI')
     end
 end
 
