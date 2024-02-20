@@ -6,7 +6,6 @@ function getMergedFMRI_data(fmriStruct,thres_type,thres)
 
 addpath('../Tools/BCT');
 path  = fmriStruct.in_path;
-subdirs = fmriStruct.subdirs;
 groups = fmriStruct.groups;
 days = fmriStruct.days;
 out_path = fmriStruct.out_path;
@@ -53,52 +52,51 @@ for g = 1:length(groups)
             matFile_pcorrZ_cur = dir([cur_path '/func/regr/Matrix_PcorrZ*.mat']);
             all_Rmat_files{groupsubject} = matFile_pcorrR_cur;
             all_Zmat_files{groupsubject} = matFile_pcorrZ_cur;
-            % Create infoFMRI struct            
-            numOfRegions = unique(numOfRegions_all(2:end));
-            % numOfRegions_all should contain a 0 in position 1.
-            % All subsequent positions should contain the number of atlas
-            % labels, which should always result in the same number.
-            % If not, then line 36 will cause an error because the numOfRegions
-            % is not unique anymore. A quick solution is then to specify
-            % a concrete number in line 29 for numOfRegions, e.g. 98.
-            infoFMRI = struct();
-            coMat = zeros(numOfRegions,numOfRegions,length(all_mat_files));
-            pcorrR_mat = zeros(numOfRegions,numOfRegions,length(all_mat_files));
-            pcorrZ_mat = zeros(numOfRegions,numOfRegions,length(all_mat_files));
-            namesOfMat = cell(length(all_mat_files),1);
-            clustercoef =               zeros(length(all_mat_files),numOfRegions); 
-            clustercoef_rand =          zeros(length(all_mat_files),numOfRegions);
-            clustercoef_normalized =    zeros(length(all_mat_files),numOfRegions);
-            participationcoef =         zeros(length(all_mat_files),numOfRegions);
-            degrees =                   zeros(length(all_mat_files),numOfRegions); 
-            strengths =                 zeros(length(all_mat_files),numOfRegions); 
-            betweenness =               zeros(length(all_mat_files),numOfRegions); 
-            centrality_eigen =          zeros(length(all_mat_files),numOfRegions);
-            localEfficiency =           zeros(length(all_mat_files),numOfRegions);
-            density =                   nan(1,length(all_mat_files));
-            transitivity =              nan(1,length(all_mat_files));
-            efficiency =                nan(1,length(all_mat_files));
-            efficiency_rand =           nan(1,length(all_mat_files));
-            assortativity =             nan(1,length(all_mat_files));
-            modularity =                nan(1,length(all_mat_files));
-            charPathLength=             nan(1,length(all_mat_files));
-            charPathLength_rand =       nan(1,length(all_mat_files));
-            charPathLength_normalized = nan(1,length(all_mat_files));
-            overallConnectivity =       zeros(1,length(all_mat_files));
-
+           
             groupsubject = groupsubject + 1;
-          
-            
         end
 
         if length(all_mat_files)<1
             continue
         end
+
+        % Create infoFMRI struct            
+        numOfRegions = unique(numOfRegions_all(2:end));
+        % numOfRegions_all should contain a 0 in position 1.
+        % All subsequent positions should contain the number of atlas
+        % labels, which should always result in the same number.
+        % If not, then line 36 will cause an error because the numOfRegions
+        % is not unique anymore. A quick solution is then to specify
+        % a concrete number in line 29 for numOfRegions, e.g. 98.
+        infoFMRI = struct();
+        coMat = zeros(numOfRegions,numOfRegions,length(all_mat_files));
+        pcorrR_mat = zeros(numOfRegions,numOfRegions,length(all_mat_files));
+        pcorrZ_mat = zeros(numOfRegions,numOfRegions,length(all_mat_files));
+        namesOfMat = cell(length(all_mat_files),1);
+        clustercoef =               zeros(length(all_mat_files),numOfRegions); 
+        clustercoef_rand =          zeros(length(all_mat_files),numOfRegions);
+        clustercoef_normalized =    zeros(length(all_mat_files),numOfRegions);
+        participationcoef =         zeros(length(all_mat_files),numOfRegions);
+        degrees =                   zeros(length(all_mat_files),numOfRegions); 
+        strengths =                 zeros(length(all_mat_files),numOfRegions); 
+        betweenness =               zeros(length(all_mat_files),numOfRegions); 
+        centrality_eigen =          zeros(length(all_mat_files),numOfRegions);
+        localEfficiency =           zeros(length(all_mat_files),numOfRegions);
+        density =                   nan(1,length(all_mat_files));
+        transitivity =              nan(1,length(all_mat_files));
+        efficiency =                nan(1,length(all_mat_files));
+        efficiency_rand =           nan(1,length(all_mat_files));
+        assortativity =             nan(1,length(all_mat_files));
+        modularity =                nan(1,length(all_mat_files));
+        charPathLength=             nan(1,length(all_mat_files));
+        charPathLength_rand =       nan(1,length(all_mat_files));
+        charPathLength_normalized = nan(1,length(all_mat_files));
+        overallConnectivity =       zeros(1,length(all_mat_files));
     
         for i = 1:length(all_mat_files) % i = Subjects
                 matFile_cur = all_mat_files{i};
                 matFile_pcorrR_cur = all_Rmat_files{i};
-                matFIle_pcorrZ_cur = all_Zmat_files{i};
+                matFile_pcorrZ_cur = all_Zmat_files{i};
                 
                 tempName = strsplit(matFile_cur.folder,filesep);
                 tempName = tempName{end-3};

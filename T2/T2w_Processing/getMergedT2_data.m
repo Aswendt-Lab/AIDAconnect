@@ -2,7 +2,6 @@ function getMergedT2_data(t2Struct)
 
 path  = t2Struct.in_path;
 groups = t2Struct.groups;
-subdirs = t2Struct.subdirs;
 days = t2Struct.days;
 out_path = t2Struct.out_path;
 groupmapping = readtable(fullfile(path, "GroupMapping.xlsx"));

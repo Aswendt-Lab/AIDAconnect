@@ -20,14 +20,6 @@ inputT2.out_path = "/Users/schneiderm/Desktop/data_testing/T2";
 % This Script tests the existence of the output path and consolidates all
 % data only if the path does not exist.
 
-% Get information about the contents of the directory
-contents = dir(inputT2.in_path);
-
-% Filter out subdirectories with names containing 'sub'
-subdirs = contents([contents.isdir] & ~cellfun('isempty', regexp({contents.name}, '^sub-', 'once')));
-
-inputT2.subdirs = subdirs;
-
 addpath('../Tools/NIfTI/')
 addpath('./T2w_Processing/')
 if ~exist(inputT2.out_path,'dir') || numel(dir(inputT2.out_path)) <= 2
