@@ -12,6 +12,7 @@ AIDAconnect is a comprehensive collection of MATLAB scripts for mouse brain MRI 
 [Information about Version 1.0](https://github.com/maswendt/AIDAconnect/releases/tag/v1.0)
 <br/>
 [Information about Version 1.1](https://github.com/maswendt/AIDAconnect/releases/tag/v1.1)
+[Information about Version 2.0](https://github.com/maswendt/AIDAconnect/releases/tag/v2.0)
 
 
 <h3><b>INSTALLATION</h3></b>
