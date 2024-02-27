@@ -44,7 +44,8 @@ for g = 1:length(groups)
         end
 
         if length(all_mat_files)<1
-            error('There is no content in the given path!');
+            disp('There is no content in the given path!');
+            continue
         end
     
         infoDTI = struct();
