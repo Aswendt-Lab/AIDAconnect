@@ -177,6 +177,7 @@ for g = 1:length(groups)
     
             infoFMRI.day = days(d);
             infoFMRI.names = namesOfMat;
+            infoFMRI.group = groups(g);
             infoFMRI.matrix = current_matAll;
             infoFMRI.raw_matrix = coMat;
             infoFMRI.pcorrR_matrix = pcorrR_mat;
