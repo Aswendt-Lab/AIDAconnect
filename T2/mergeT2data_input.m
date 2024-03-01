@@ -28,4 +28,4 @@ if ~exist(inputT2.out_path,'dir') || numel(dir(inputT2.out_path)) <= 2
 else
     f = msgbox("If you wish to process your data again, please delete the output folder manually.", "Attention");
 end
-acronyms = load('../Tools/infoData/acronyms.mat').acronyms;
+acronyms = load('../Tools/infoData/acronyms_parental.mat').acronyms;

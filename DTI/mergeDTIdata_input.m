@@ -24,6 +24,7 @@ thres = 1;
 
 % Output path 
 inputDTI.out_path = "/Volumes/path/to/desired/output";
+acronymsFlag = "splitted"  %Set here to "splited" or "nonsplitted" for the desired atlas to be used.
 
 %% Do not modify the following lines
 % This script tests the existence of the output path and consolidates all
@@ -40,4 +41,8 @@ else
     f = msgbox("If you wish to process your data again, please delete the output folder manually.", "Attention");
 end
 [graphCell,matrixValues,ids]=graphAnalysis_DTI(inputDTI);
-acronyms = load('../Tools/infoData/acronyms_splitted.mat').acronyms;
+if acronymsFlag == "splitted"
+acronyms = load('../Tools/infoData/acronyms_parental_splitted.mat').acronyms;
+else
+acronyms = load('../Tools/infoData/acronyms_parental.mat').acronyms;
+end
