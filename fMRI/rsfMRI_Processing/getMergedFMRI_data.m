@@ -48,8 +48,8 @@ for g = 1:length(groups)
             if j-1 ~= 1 && numOfRegions_all(j) ~= numOfRegions_all(j-1)
                 disp('Warning: Number of atlas labels differs between two subjects, groups or days!');
             end
-            matFile_pcorrR_cur = dir([cur_path '/func/regr/Matrix_PcorrR*.mat']);
-            matFile_pcorrZ_cur = dir([cur_path '/func/regr/Matrix_PcorrZ*.mat']);
+            matFile_pcorrR_cur = dir([cur_path '/func/regr/Matrix_PcorrR_Split*.mat']);
+            matFile_pcorrZ_cur = dir([cur_path '/func/regr/Matrix_PcorrZ_Split*.mat']);
             all_Rmat_files{groupsubject} = matFile_pcorrR_cur;
             all_Zmat_files{groupsubject} = matFile_pcorrZ_cur;
            
@@ -104,8 +104,9 @@ for g = 1:length(groups)
                 
                 [coMat(:,:,i),labels] = matrixMaker_rsfMRI((fullfile(matFile_cur.folder,matFile_cur.name)));
                 current_matAll = abs(coMat); % Absolute values of the matrices
-    
-                pcorrR_data = load(fullfile(matFile_pcorrR_cur.folder,matFile_pcorrR_cur.name));
+                f1 = matFile_pcorrR_cur.folder;
+                n1 = matFile_pcorrR_cur.name;
+                pcorrR_data = load(fullfile(f1,n1));
                 pcorrR_mat(:,:,i) = double(pcorrR_data.matrix);
     
                 pcorrZ_data = load(fullfile(matFile_pcorrZ_cur.folder,matFile_pcorrZ_cur.name));

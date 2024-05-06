@@ -5,13 +5,13 @@
 %% Specifications
 
 % Path to the processed image data folder (e.g. proc_data)
-inputFMRI.in_path = "C:\Users\arefk\Desktop\Projects\testData\proc_data";
+inputFMRI.in_path = "C:\Users\arefk\Desktop\Projects\testData\Aswendt_GV\proc_data";
 
-% Observation days e.g. “P1" etc.
-inputFMRI.days = ["ses-1"];
+% Observation days e.g. “1","2" etc.
+inputFMRI.days = ["1"];
 
 % Groups e.g. “Sham” etc.
-inputFMRI.groups =  [""];
+inputFMRI.groups =  ["test1"];
 
 % Threshold Type (0: Fixed, 1: Density-based)
 thres_type = 1;
@@ -19,11 +19,11 @@ thres_type = 1;
 % Threshold (0-1)
 % For the Density-based threshold, this is the proportion of
 % the biggest weights to preserve
-thres = 0.2;
+thres = 0.4;
  
 % Output path 
-inputFMRI.out_path = "C:\Users\arefk\Desktop\Projects\testData\proc_data\fmriOut";
-acronymsFlag = "splitted"  %Set here to "splited" or "nonsplitted" for the desired atlas to be used.
+inputFMRI.out_path = "C:\Users\arefk\Desktop\Projects\testData\Aswendt_GV\proc_data\fmriOut";
+acronymsFlag = "nonsplitted"  %Set here to "splited" or "nonsplitted" for the desired atlas to be used.
 
 %% Do not modify the following lines
 % This Script tests the existence of the output path and consolidates all
