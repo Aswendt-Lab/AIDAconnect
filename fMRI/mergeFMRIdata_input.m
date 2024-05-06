@@ -5,13 +5,13 @@
 %% Specifications
 
 % Path to the processed image data folder (e.g. proc_data)
-inputFMRI.in_path = "/Volumes/path/to/proc_data";
+inputFMRI.in_path = "C:\Users\arefk\Desktop\Projects\testData\proc_data";
 
 % Observation days e.g. “P1" etc.
-inputFMRI.days = ["Baseline","P7","P14","P28","P42","P56"];
+inputFMRI.days = ["ses-1"];
 
 % Groups e.g. “Sham” etc.
-inputFMRI.groups = = ["Group1", "Group2"];
+inputFMRI.groups =  [""];
 
 % Threshold Type (0: Fixed, 1: Density-based)
 thres_type = 1;
@@ -22,7 +22,7 @@ thres_type = 1;
 thres = 0.2;
  
 % Output path 
-inputFMRI.out_path = "/Volumes/path/to/desired/output";
+inputFMRI.out_path = "C:\Users\arefk\Desktop\Projects\testData\proc_data\fmriOut";
 acronymsFlag = "splitted"  %Set here to "splited" or "nonsplitted" for the desired atlas to be used.
 
 %% Do not modify the following lines
