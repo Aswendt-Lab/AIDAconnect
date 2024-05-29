@@ -1,3 +1,5 @@
+[![Static Badge](https://img.shields.io/badge/data_structure-BIDS-yellow)](https://bids.neuroimaging.io/news.html) ![Static Badge](https://img.shields.io/badge/MATLAB-R2018b_or_higher-orange) ![Static Badge](https://img.shields.io/badge/dependencies-FSLNets,_BCT,_NIfTI-orange)
+
 [1.2]: http://i.imgur.com/wWzX9uB.png
 [1]: http://www.twitter.com/AswendtMarkus
 <!--social icon from https://github.com/carlsednaoui/gitsocial -->
