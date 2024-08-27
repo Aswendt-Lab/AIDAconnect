@@ -5,7 +5,7 @@
 
 %% Specifications
 
-filename =  "C:\Users\arefk\Desktop\Projects\testData\Aswendt_GV\proc_data\fmriOut\test1\1_test1.mat"; % path to a processed MAT-File
+filename =  "C:\Users\aswen\Desktop\TestingData\Aswendt_qc_rsfmri_plot\proc_data\fmriOut3\test1\1_test1.mat"; % path to a processed MAT-File
 selectedRegions = ["L SSp-ll", "L HIP", "R HIP", "L DORpm", "R DORpm", "L lfbst", "R DORsm"]; % defines regions to be shown (as in acronyms)
 clims = [0, 0.6]; % dynamic range of plot, e.g.: [0, 1] -> correlations between 0 and 1 can be displayed with different colors
 

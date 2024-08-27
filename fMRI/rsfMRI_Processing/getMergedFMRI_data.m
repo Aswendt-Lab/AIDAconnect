@@ -34,7 +34,7 @@ for g = 1:length(groups)
                 continue
             end
             
-            matFile_cur = dir([cur_path '/func/regr/MasksTCsSplit*.mat']);
+            matFile_cur = dir(fullfile(cur_path, '/func/regr/MasksTCsSplit*.mat'));
             if isempty(matFile_cur)
                 continue
             end
@@ -48,8 +48,8 @@ for g = 1:length(groups)
             if j-1 ~= 1 && numOfRegions_all(j) ~= numOfRegions_all(j-1)
                 disp('Warning: Number of atlas labels differs between two subjects, groups or days!');
             end
-            matFile_pcorrR_cur = dir([cur_path '/func/regr/Matrix_PcorrR_Split*.mat']);
-            matFile_pcorrZ_cur = dir([cur_path '/func/regr/Matrix_PcorrZ_Split*.mat']);
+            matFile_pcorrR_cur = dir([cur_path '/func/regr/Matrix_PcorrR*.mat']);
+            matFile_pcorrZ_cur = dir([cur_path '/func/regr/Matrix_PcorrZ*.mat']);
             all_Rmat_files{groupsubject} = matFile_pcorrR_cur;
             all_Zmat_files{groupsubject} = matFile_pcorrZ_cur;
            

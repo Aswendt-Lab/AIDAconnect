@@ -5,7 +5,7 @@
 %% Specifications
 
 % Path to the processed image data folder (e.g. proc_data)
-inputFMRI.in_path = "C:\Users\arefk\Desktop\Projects\testData\Aswendt_GV\proc_data";
+inputFMRI.in_path = "C:\Users\aswen\Desktop\TestingData\Daniel\proc_data";
 
 % Observation days e.g. “1","2" etc.
 inputFMRI.days = ["1"];
@@ -22,7 +22,7 @@ thres_type = 1;
 thres = 0.4;
  
 % Output path 
-inputFMRI.out_path = "C:\Users\arefk\Desktop\Projects\testData\Aswendt_GV\proc_data\fmriOut";
+inputFMRI.out_path = "C:\Users\aswen\Desktop\TestingData\Daniel\proc_data\funcOut";
 acronymsFlag = "nonsplitted"  %Set here to "splited" or "nonsplitted" for the desired atlas to be used.
 
 %% Do not modify the following lines
