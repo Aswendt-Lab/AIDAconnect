@@ -19,7 +19,7 @@ days = inputFMRI.days;
 groups = inputFMRI.groups;
 numOfDays = size(inputFMRI.days,2);
 numOfGroups = size(inputFMRI.groups,2);
-tempFile = load('../Tools/infoData/acronyms_splitted.mat');
+tempFile = load('../Tools/infoData/rat_acronyms_splitted.mat');
 acronyms = tempFile.acronyms;
 [~,b] = ismember(strNodeName,acronyms);
 addpath('./rsfMRI_Processing/');

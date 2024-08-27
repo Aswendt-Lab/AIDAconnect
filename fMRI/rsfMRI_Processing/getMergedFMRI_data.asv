@@ -218,9 +218,9 @@ for g = 1:length(groups)
             if ~exist(targetPath,'dir')
                 mkdir(targetPath);
             end
-            disp(strcat(targetPath,filesep,days(d),'.mat'))
+            disp(fullfile(targetPath,days(d),"_",groups(g),'.mat'))
             disp(infoFMRI.names)
-            save(strcat(targetPath,filesep,days(d),'.mat'),'infoFMRI')
+            save(fullfile(targetPath,days(d),"_",groups(g),'.mat'),'infoFMRI')
     end
 
 end

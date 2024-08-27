@@ -5,9 +5,9 @@
 
 %% Specifications
 
-filename =  "/Volumes/path/to/proc_data/Treatment/P28.mat"; % path to a processed MAT-File
+filename =  "C:\Users\aswen\Desktop\TestingData\Daniel\proc_data\funcOut\test1\1.mat"; % path to a processed MAT-File
 % select data to plot, 1 for r-values and 0 for z-values 
-dtype = 0;
+dtype = 1;
 
 %% Do not modify the following lines
 

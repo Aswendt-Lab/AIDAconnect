@@ -8,11 +8,11 @@ path = inputFMRI.out_path;
 groups = inputFMRI.groups;
 days = inputFMRI.days;
 %% Load related information
-tempFile = load('../Tools/infoData/acronyms_splitted.mat');
+tempFile = load('../Tools/infoData/rat_acronyms_splitted.mat');
 acronyms = tempFile.acronyms;
-tempFile = load('../Tools/infoData/acro_numbers_splitted.mat');
+tempFile = load('../Tools/infoData/rat_acro_numbers_splitted.mat');
 acro_numbers = tempFile.annotationsNumber;
-niiData = load_nii('../Tools/infoData/annoVolume+2000_rsfMRI.nii.gz');
+niiData = load_nii('../Tools/infoData/rat_SIGMA_InVivo_Anatomical_Brain_Atlas.nii.gz');
 volume = niiData.img;
 %% Find center of gravity for existing labels
 x_coord = nan(length(acro_numbers),1);
@@ -35,7 +35,7 @@ for gIdx = 1:length(groups)
         
         % Load the files created by getMergedFMRI_data.m 
         % and get the correlation matrices
-        tempFile = load(fullfile(path,groups(gIdx),days(dIdx) + '_' + groups(gIdx) + '.mat'));
+        tempFile = load(fullfile(path,groups(gIdx),days(dIdx)  + '.mat'));
         tempMatrices = tempFile.infoFMRI.matrix;
         meanMatrixValues = mean(tempMatrices,3);
         ids{gIdx,dIdx} = tempFile.infoFMRI.names;

@@ -8,7 +8,7 @@ function plotSelectedRegions(inputFMRI, graphCell)
 % the command line in the command window (see Example).
 
 % selected regions
-selectedRegions=["L SSp-ll", "L HIP", "R HIP", "L DORpm", "R DORpm", "L lfbst", "R DORsm"];
+selectedRegions=["L_PSC_BF","R_PSC_BF"];
 
 % options values: 'degree' or 'strength'
 options='degree';

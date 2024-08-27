@@ -11,7 +11,7 @@ inputFMRI.in_path = "C:\Users\aswen\Desktop\TestingData\Daniel\proc_data";
 inputFMRI.days = ["1"];
 
 % Groups e.g. “Sham” etc.
-inputFMRI.groups =  ["test1"];
+inputFMRI.groups =  ["test1", "test2"];
 
 % Threshold Type (0: Fixed, 1: Density-based)
 thres_type = 1;
