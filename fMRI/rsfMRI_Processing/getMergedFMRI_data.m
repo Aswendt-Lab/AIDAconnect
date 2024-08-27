@@ -27,14 +27,14 @@ for g = 1:length(groups)
             if group ~= cur_group
                 continue
             end
-            disp('Processing '+days(d)+': '+ subname+' ...');       
-            cur_path = char(fullfile(path,subname,"ses-"+days(d)));
+            disp('Processing '+days(d)+': '+ "sub-"+subname+' ...');       
+            cur_path = char(fullfile(path,"sub-"+subname,"ses-"+days(d)));
             if ~isfolder(cur_path)
                 disp(cur_path + " does not exist");
                 continue
             end
             
-            matFile_cur = dir([cur_path '/func/regr/MasksTCsSplit*.mat']);
+            matFile_cur = dir(fullfile(cur_path, '/func/regr/MasksTCsSplit*.mat'));
             if isempty(matFile_cur)
                 continue
             end
@@ -48,8 +48,8 @@ for g = 1:length(groups)
             if j-1 ~= 1 && numOfRegions_all(j) ~= numOfRegions_all(j-1)
                 disp('Warning: Number of atlas labels differs between two subjects, groups or days!');
             end
-            matFile_pcorrR_cur = dir([cur_path '/func/regr/Matrix_PcorrR*.mat']);
-            matFile_pcorrZ_cur = dir([cur_path '/func/regr/Matrix_PcorrZ*.mat']);
+            matFile_pcorrR_cur = dir([cur_path '/func/regr/Matrix_PcorrR_Split*.mat']);
+            matFile_pcorrZ_cur = dir([cur_path '/func/regr/Matrix_PcorrZ_Split*.mat']);
             all_Rmat_files{groupsubject} = matFile_pcorrR_cur;
             all_Zmat_files{groupsubject} = matFile_pcorrZ_cur;
            
@@ -104,8 +104,10 @@ for g = 1:length(groups)
                 
                 [coMat(:,:,i),labels] = matrixMaker_rsfMRI((fullfile(matFile_cur.folder,matFile_cur.name)));
                 current_matAll = abs(coMat); % Absolute values of the matrices
-    
-                pcorrR_data = load(fullfile(matFile_pcorrR_cur.folder,matFile_pcorrR_cur.name));
+                
+                f1 = matFile_pcorrR_cur.folder;
+                n1 = matFile_pcorrR_cur.name;
+                pcorrR_data = load(fullfile(f1,n1));
                 pcorrR_mat(:,:,i) = double(pcorrR_data.matrix);
     
                 pcorrZ_data = load(fullfile(matFile_pcorrZ_cur.folder,matFile_pcorrZ_cur.name));
@@ -217,9 +219,9 @@ for g = 1:length(groups)
             if ~exist(targetPath,'dir')
                 mkdir(targetPath);
             end
-            disp(strcat(targetPath,filesep,days(d),"_",groups(g),'.mat'))
+            disp(strcat(targetPath,filesep,days(d),'.mat'))
             disp(infoFMRI.names)
-            save(strcat(targetPath,filesep,days(d),"_",groups(g),'.mat'),'infoFMRI')
+            save(strcat(targetPath,filesep,days(d),'.mat'),'infoFMRI')
     end
 
 end
