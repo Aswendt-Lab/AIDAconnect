@@ -11,7 +11,7 @@ inputFMRI.in_path = "C:\Users\aswen\Desktop\TestingData\Daniel\proc_data";
 inputFMRI.days = ["1"];
 
 % Groups e.g. “Sham” etc.
-inputFMRI.groups =  ["test1", "test2"];
+inputFMRI.groups =  ["test1", "test2"]; %Whatever you name your group in the GroupMapping.xlsx
 
 % Threshold Type (0: Fixed, 1: Density-based)
 thres_type = 1;
