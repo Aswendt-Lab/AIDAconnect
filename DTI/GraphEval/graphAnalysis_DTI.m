@@ -35,7 +35,7 @@ for gIdx = 1:length(groups)
         
         % Load the files created by getMergedDTI_data.m 
         % and get the fiber count matrices     
-        tempFile = load(fullfile(path,groups(gIdx),[char(days(dIdx)) + "_" + groups(gIdx) + '.mat']));
+        tempFile = load(fullfile(path,groups(gIdx),[(days(dIdx)) + '.mat']));
         tempMatrices = tempFile.infoDTI.matrix;
         meanMatrixValues = mean(tempMatrices,3);
         ids{gIdx,dIdx} = tempFile.infoDTI.names;

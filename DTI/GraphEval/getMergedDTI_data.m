@@ -25,14 +25,14 @@ for g = 1:length(groups)
             if group ~= cur_group
                 continue
             end
-            disp('Processing '+days(d)+': '+ subname+' ...');       
+            disp('Processing '+days(d)+': '+ "sub-"+subname+' ...');       
             cur_path = char(fullfile(path,subname,"ses-"+days(d)));
             if ~isfolder(cur_path)
                 disp(cur_path + " does not exist");
                 continue
             end
-            
-            matFile_cur = dir([cur_path '/dwi/connectivity/*AnnoSplit_parental*pass.connectivity.mat']);
+    
+            matFile_cur = dir(fullfile(cur_path,'/dwi/connectivity/*AnnoSplit_parental*pass.connectivity.mat'));
             if isempty(matFile_cur)
                 continue
             end
@@ -213,9 +213,9 @@ for g = 1:length(groups)
         % of a random network.     
         % If smallWorldness > 1 then the network can be labeled as "small world".
         
-        clustercoef_normalized(:,i) = nanmean(clustercoef(:,i),2)./nanmean(clustercoef_rand(:,i),2);
+        clustercoef_normalized(i,:) = nanmean(clustercoef(i,:),2)./nanmean(clustercoef_rand(i,:),2);
         charPathLength_normalized(i) = charPathLength(i)/charPathLength_rand(i);        
-        infoDTI.smallWorldness = (clustercoef_normalized(:,i)/charPathLength_normalized(i))';
+        infoDTI.smallWorldness = (clustercoef_normalized(i,:)/charPathLength_normalized(i))';
         infoDTI.overallConnectivity = overallConnectivity;
         
         %infoDTI.smallWorldness = (nanmean(clustercoef(:,i),2)/charPathLength(i))';
@@ -229,9 +229,9 @@ for g = 1:length(groups)
         if ~exist(targetPath,'dir')
             mkdir(targetPath);
         end   
-        disp(strcat(targetPath,filesep,days(d),"_",groups(g),'.mat'))
+        disp(strcat(targetPath,filesep,days(d),'.mat'))
         disp(infoDTI.names)
-        save(strcat(targetPath,filesep,days(d),"_",groups(g),'.mat'),'infoDTI')
+        save(strcat(targetPath,filesep,days(d),'.mat'),'infoDTI')
     end
 end
 

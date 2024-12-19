@@ -6,13 +6,11 @@
 %% Specifications
 
 % Path to the processed image data folder (e.g. proc_data)
-inputDTI.in_path = "/Volumes/path/to/proc_data";
+inputDTI.in_path = "E:\CRC_data\SND\proc_data";
 
-% Observation days (e.g. "P1" etc.)
-inputDTI.days =  ["Baseline","P7","P14","P28","P42","P56"];
-
+inputDTI.days = ["Baseline", "P1", "P7", "P14","P21","P28"];
 % Groups (e.g. "Sham" etc.)
-inputDTI.groups = ["Group1", "Group2"];
+inputDTI.groups = ["all"];
 
 % Threshold Type (0: Fixed, 1: Density-based)
 thres_type = 1;
@@ -20,10 +18,10 @@ thres_type = 1;
 % Threshold (0-1)
 % For the Density-based threshold, this is the proportion of
 % the biggest weights to preserve
-thres = 1;
+thres = 0.7;
 
 % Output path 
-inputDTI.out_path = "/Volumes/path/to/desired/output";
+inputDTI.out_path = "E:\CRC_data\SND\outputConnect";
 acronymsFlag = "splitted"  %Set here to "splited" or "nonsplitted" for the desired atlas to be used.
 
 %% Do not modify the following lines
