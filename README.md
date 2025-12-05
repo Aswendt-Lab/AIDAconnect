@@ -35,14 +35,14 @@ rs-fMRI (functional connectivity scan).
 The given tools from AIDAconnect are provided for anatomical T2-weighted MRI (T2w), diffusion tensor imaging (DTI) and resting-state functional MRI (rs-fMRI) data and are currently designed for creating weighted-undirected graphs only.
 
 [<h3><b>CONTACT</h3></b>](https://neurologie.uk-koeln.de/forschung/ag-neuroimaging-neuroengineering/)
-Leon Scharwächter and Markus Aswendt (contact: markus.aswendt@uk-koeln.de)[![alt text][1.2]][1]
-
-[<h3><b>CONTACT</h3></b>](https://neurologie.uk-koeln.de/forschung/ag-neuroimaging-neuroengineering/)
-Chat with us [![Gitter](https://badges.gitter.im/AIDA_tools/community.svg)](https://gitter.im/AIDA_tools/community?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge) 
+If you encounter problems, report directly in [![Gitter](https://badges.gitter.im/AIDA_tools/community.svg)](https://gitter.im/AIDA_tools/community?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge)
 
 or 
 
-join our Open Office Hour - each Thursday 4:30 pm (UTC+2) [![Zoom](https://img.shields.io/badge/Zoom-2D8CFF?style=for-the-badge&logo=zoom&logoColor)](https://uni-koeln.zoom.us/meeting/register/tJYsceyorDoqGdX4H8Z7c86_qxoaq6yOdFGM)
+join our Open Office Hour - each Thursday 3:00 pm (UTC+2) [![Google Meet](https://img.shields.io/badge/Google%20Meet-00897B?style=for-the-badge&logo=google-meet&logoColor=white)](https://meet.google.com/hsk-bmpj-meg)
+
+
+For all other inquiries: aswendtlab@gmail.com.
 ___
 LICENSE
 GNU General Public License v3.0 
