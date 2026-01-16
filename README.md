@@ -39,7 +39,7 @@ If you encounter problems, report directly in [![Gitter](https://badges.gitter.i
 
 or 
 
-join our Open Office Hour - each Thursday 3:00 pm (UTC+2) [![Google Meet](https://img.shields.io/badge/Google%20Meet-00897B?style=for-the-badge&logo=google-meet&logoColor=white)](https://meet.google.com/hsk-bmpj-meg)
+join our Open Office Hour - each Thursday 3:00 pm (UTC+2) [![Zoom](https://img.shields.io/badge/Zoom-2D8CFF?style=for-the-badge&logo=zoom&logoColor=white)](https://uni-frankfurt.zoom-x.de/j/63112745009?pwd=JBTjMVbuaTw9cZvFnppTwCPjGdQEyx.1)
 
 
 For all other inquiries: aswendtlab@gmail.com.
